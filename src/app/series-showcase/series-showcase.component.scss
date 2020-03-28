@@ -1,0 +1,20 @@
+.container {
+  white-space: nowrap;
+  overflow-x: scroll;
+
+  h1 {
+    font-size: 2.4rem;
+    margin: 1.5rem 0;
+  }
+
+  .series {
+    display: inline-block;
+    width: 150px;
+    margin-right: 1rem;
+
+    .series-name {
+      text-align: center;
+      transition: 0.5s;
+    }
+  }
+}
