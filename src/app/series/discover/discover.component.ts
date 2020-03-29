@@ -1,21 +1,7 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
-import { Apollo } from "apollo-angular";
-import gql from "graphql-tag";
 
-// I test this out with a search for now, as my backend doenst have "discover" yet
-const QUERY = gql`
-  query {
-    series {
-      search(name: "de mol") {
-        id
-        seriesName
-        poster
-      }
-    }
-  }
-`;
+import { SeriesdataService } from "../seriesdata.service";
 
 @Component({
   selector: "discover",
@@ -23,13 +9,13 @@ const QUERY = gql`
   styleUrls: ["./discover.component.scss"]
 })
 export class DiscoverComponent implements OnInit {
-  public series$: Observable<any>;
+  public today$: Observable<any>;
+  public thisweek$: Observable<any>;
 
-  constructor(private apollo: Apollo) {}
+  constructor(private _seriesdataService: SeriesdataService) {}
 
   ngOnInit() {
-    this.series$ = this.apollo
-      .watchQuery<any>({ query: QUERY })
-      .valueChanges.pipe(map(s => s.data.series.search));
+    this.today$ = this._seriesdataService.today$("BE");
+    this.thisweek$ = this._seriesdataService.schedule$("BE", 1, 7);
   }
 }

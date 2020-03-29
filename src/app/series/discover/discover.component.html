@@ -1,4 +1,9 @@
 <series-showcase
-  showcaseTitle="Series"
-  [series]="series$ | async"
+  showcaseTitle="Today"
+  [series]="today$ | async"
+></series-showcase>
+
+<series-showcase
+  showcaseTitle="Next 7 days"
+  [series]="thisweek$ | async"
 ></series-showcase>

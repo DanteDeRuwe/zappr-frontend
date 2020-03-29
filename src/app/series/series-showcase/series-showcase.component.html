@@ -1,19 +1,21 @@
 <section class="container is-fluid">
   <h1>{{ showcaseTitle }}</h1>
-  <div class="showcase">
-    <div class="series" *ngFor="let s of series">
-      <a [href]="'series/' + s.id" _target="blank">
-        <img
-          *ngIf="s.poster != null; else posternullTemplate"
-          class="poster"
-          [src]="'https://artworks.thetvdb.com' + s?.poster"
-        />
-        <ng-template #posternullTemplate>
-          <div class="poster poster-not-found"></div>
-        </ng-template>
-      </a>
-      <div class="series-name">
-        {{ s?.seriesName }}
+  <div class="scroll">
+    <div class="showcase">
+      <div class="series" *ngFor="let s of series">
+        <a [href]="'series/' + s.id" _target="blank">
+          <img
+            *ngIf="s.imageUrl != null; else posternullTemplate"
+            class="poster"
+            [src]="s?.imageUrl"
+          />
+          <ng-template #posternullTemplate>
+            <div class="poster poster-not-found"></div>
+          </ng-template>
+        </a>
+        <div class="series-name">
+          {{ s?.name }}
+        </div>
       </div>
     </div>
   </div>
