@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import { Subscription } from "rxjs";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
 import { Apollo } from "apollo-angular";
 import gql from "graphql-tag";
 
@@ -21,25 +22,14 @@ const QUERY = gql`
   templateUrl: "./discover.component.html",
   styleUrls: ["./discover.component.scss"]
 })
-export class DiscoverComponent implements OnInit, OnDestroy {
-  loading: boolean;
-  series: any[];
-
-  private querySubscription: Subscription;
+export class DiscoverComponent implements OnInit {
+  public series$: Observable<any>;
 
   constructor(private apollo: Apollo) {}
 
   ngOnInit() {
-    this.querySubscription = this.apollo
-      .watchQuery<any>({
-        query: QUERY
-      })
-      .valueChanges.subscribe(({ data }) => {
-        this.series = data.series.search;
-      });
-  }
-
-  ngOnDestroy() {
-    this.querySubscription.unsubscribe();
+    this.series$ = this.apollo
+      .watchQuery<any>({ query: QUERY })
+      .valueChanges.pipe(map(s => s.data.series.search));
   }
 }
