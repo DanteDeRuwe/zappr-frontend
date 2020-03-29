@@ -1,23 +1,45 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Subscription } from "rxjs";
+import { Apollo } from "apollo-angular";
+import gql from "graphql-tag";
+
+// I test this out with a search for now, as my backend doenst have "discover" yet
+const QUERY = gql`
+  query {
+    series {
+      search(name: "de mol") {
+        id
+        seriesName
+        poster
+      }
+    }
+  }
+`;
 
 @Component({
   selector: "discover",
   templateUrl: "./discover.component.html",
   styleUrls: ["./discover.component.scss"]
 })
-export class DiscoverComponent implements OnInit {
-  public posters: string[];
+export class DiscoverComponent implements OnInit, OnDestroy {
+  loading: boolean;
+  series: any[];
 
-  constructor() {}
+  private querySubscription: Subscription;
 
-  ngOnInit(): void {
-    this.posters = [
-      "https://artworks.thetvdb.com/banners/posters/85452-2.jpg",
-      "https://artworks.thetvdb.com/banners/posters/5d4d356643957.jpg",
-      "https://artworks.thetvdb.com/banners/series/373489/posters/62024527.jpg",
-      "https://artworks.thetvdb.com/banners/posters/85452-2.jpg",
-      "https://artworks.thetvdb.com/banners/posters/5d4d356643957.jpg",
-      "https://artworks.thetvdb.com/banners/series/373489/posters/62024527.jpg"
-    ];
+  constructor(private apollo: Apollo) {}
+
+  ngOnInit() {
+    this.querySubscription = this.apollo
+      .watchQuery<any>({
+        query: QUERY
+      })
+      .valueChanges.subscribe(({ data }) => {
+        this.series = data.series.search;
+      });
+  }
+
+  ngOnDestroy() {
+    this.querySubscription.unsubscribe();
   }
 }

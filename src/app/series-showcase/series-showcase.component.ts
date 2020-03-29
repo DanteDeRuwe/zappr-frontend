@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from "@angular/core";
 })
 export class SeriesShowcaseComponent implements OnInit {
   @Input() public showcaseTitle: string;
-  @Input() public posters: string[];
+  @Input() public series: any[];
 
   constructor() {}
 
