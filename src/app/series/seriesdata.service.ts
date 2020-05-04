@@ -13,7 +13,7 @@ export class SeriesdataService {
   search$(name: string): Observable<any> {
     const QUERY = gql`
       query {
-        series {
+        seriesQuery {
           search(name: "${name}") {
             id
             name
@@ -24,7 +24,7 @@ export class SeriesdataService {
     `;
     return this._apollo
       .watchQuery<any>({ query: QUERY })
-      .valueChanges.pipe(map(s => s.data.series.search));
+      .valueChanges.pipe(map((s) => s.data.seriesQuery.search));
   }
 
   schedule$(
@@ -34,7 +34,7 @@ export class SeriesdataService {
   ): Observable<any> {
     const QUERY = gql`
       query {
-        series {
+        seriesQuery {
           schedule(country: "${country}", start: ${start}, numberofdays: ${numberofdays}) {
             id
             name
@@ -46,13 +46,13 @@ export class SeriesdataService {
     console.log(QUERY);
     return this._apollo
       .watchQuery<any>({ query: QUERY })
-      .valueChanges.pipe(map(s => s.data.series.schedule));
+      .valueChanges.pipe(map((s) => s.data.seriesQuery.schedule));
   }
 
   today$(country: string): Observable<any> {
     const QUERY = gql`
       query {
-        series {
+        seriesQuery {
           today(country: "${country}") {
             id
             name
@@ -63,6 +63,6 @@ export class SeriesdataService {
     `;
     return this._apollo
       .watchQuery<any>({ query: QUERY })
-      .valueChanges.pipe(map(s => s.data.series.today));
+      .valueChanges.pipe(map((s) => s.data.seriesQuery.today));
   }
 }
