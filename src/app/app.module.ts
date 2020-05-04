@@ -6,9 +6,10 @@ import { AppComponent } from "./app.component";
 import { GraphQLModule } from "./graphql.module";
 import { HttpClientModule } from "@angular/common/http";
 import { SeriesModule } from "./series/series.module";
+import { MainLayoutComponent } from './main-layout/main-layout.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, MainLayoutComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
