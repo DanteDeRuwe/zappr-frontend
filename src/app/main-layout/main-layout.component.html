@@ -1,11 +1,24 @@
-<nav>
-  <ul>
-    <li><a [routerLink]="['discover']">Discover</a></li>
-  </ul>
-</nav>
+<div class="wrapper">
+  <!-- Nav Sidebar -->
+  <nav>
+    <header>
+      <a [routerLink]="['']">zappr</a>
+    </header>
 
-<main>
-  <ng-content></ng-content>
-</main>
+    <ul>
+      <li>
+        <a [routerLink]="['discover']">discover</a>
+      </li>
+    </ul>
+  </nav>
 
-<footer>Made with <span>♥</span> by Dante De Ruwe</footer>
+  <!-- Main Content -->
+  <main>
+    <ng-content></ng-content>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="text-center">Made with <span>♥</span> by Dante De Ruwe</div>
+  </footer>
+</div>

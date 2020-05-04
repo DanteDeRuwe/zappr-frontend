@@ -1,0 +1,56 @@
+@import "~bootstrap/scss/bootstrap";
+
+/* 
+* GRID
+*/
+.wrapper {
+  display: grid;
+  grid-template-areas:
+    "nav content side"
+    "nav footer footer";
+
+  grid-template-columns: 200px 1fr 200px;
+  grid-template-rows: auto 1fr auto;
+  grid-gap: 10px;
+
+  height: 100vh;
+}
+
+@include media-breakpoint-down(sm) {
+  .wrapper {
+    grid-template-areas:
+      "nav"
+      "content"
+      "footer";
+
+    grid-template-columns: 1fr;
+    grid-template-rows:
+      minmax(75px, auto) /* Nav */
+      1fr /* Content */
+      auto; /* Footer */
+  }
+}
+
+nav {
+  grid-area: nav;
+}
+main {
+  grid-area: content;
+}
+footer {
+  grid-area: footer;
+}
+
+/*
+* NAV
+*/
+
+nav {
+  header {
+    font-size: 2rem;
+    font-family: Comfortaa, sans-serif;
+  }
+  ul {
+    list-style: none;
+  }
+}
