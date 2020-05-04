@@ -3,6 +3,7 @@ import gql from "graphql-tag";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { Apollo, QueryRef } from "apollo-angular";
+import { Series } from "./series.model";
 
 @Injectable({
   providedIn: "root"
@@ -10,7 +11,7 @@ import { Apollo, QueryRef } from "apollo-angular";
 export class SeriesdataService {
   constructor(private _apollo: Apollo) {}
 
-  search$(name: string): Observable<any> {
+  search$(name: string): Observable<Series> {
     const QUERY = gql`
       query {
         seriesQuery {
@@ -31,7 +32,7 @@ export class SeriesdataService {
     country: string,
     start: number,
     numberofdays: number
-  ): Observable<any> {
+  ): Observable<Series[]> {
     const QUERY = gql`
       query {
         seriesQuery {
@@ -49,7 +50,7 @@ export class SeriesdataService {
       .valueChanges.pipe(map((s) => s.data.seriesQuery.schedule));
   }
 
-  today$(country: string): Observable<any> {
+  today$(country: string): Observable<Series[]> {
     const QUERY = gql`
       query {
         seriesQuery {

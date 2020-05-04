@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
+import { Series } from "../series.model";
 
 @Component({
   selector: "series-showcase",
@@ -7,7 +8,7 @@ import { Component, OnInit, Input } from "@angular/core";
 })
 export class SeriesShowcaseComponent implements OnInit {
   @Input() public showcaseTitle: string;
-  @Input() public series: any[];
+  @Input() public series: Series[];
 
   constructor() {}
 
