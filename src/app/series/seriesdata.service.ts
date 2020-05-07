@@ -6,10 +6,43 @@ import { Apollo, QueryRef } from "apollo-angular";
 import { Series } from "./series.model";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class SeriesdataService {
   constructor(private _apollo: Apollo) {}
+
+  get$(id: number): Observable<Series> {
+    const QUERY = gql`
+      query {
+        seriesQuery {
+          get(id: ${id}) {
+            airTime
+            averageRating
+            comments{
+              id
+              author{
+                fullName
+              }
+              text
+            }
+            description
+            ended
+            genres
+            id
+            imageUrl
+            name
+            network
+            numberOfSeasons
+            officialSite
+            premiered
+          }
+        }
+      }
+    `;
+    return this._apollo
+      .watchQuery<any>({ query: QUERY })
+      .valueChanges.pipe(map((s) => s.data.seriesQuery.get));
+  }
 
   search$(name: string): Observable<Series> {
     const QUERY = gql`

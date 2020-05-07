@@ -1,1 +1,19 @@
-<p>series-detail works!</p>
+<div *ngIf="series$ | async as s">
+  <h1>{{ s.name }}</h1>
+  <img *ngIf="s.imageUrl != null" class="poster" [src]="s?.imageUrl" />
+  <div [innerHTML]="s.description"></div>
+
+  <div>{{ s.airTime }}</div>
+  <div>{{ s.averageRating }}</div>
+  <div>{{ s.ended }}</div>
+  <div>{{ s.genres.join(", ") }}</div>
+  <div>{{ s.network }}</div>
+  <div>{{ s.numberOfSeasons }}</div>
+  <div>{{ s.officialSite }}</div>
+  <div>{{ s.premiered }}</div>
+
+  <div *ngFor="let c of s.comments">
+    <b>{{ c.author.fullName }}</b
+    >{{ c.text }}
+  </div>
+</div>
