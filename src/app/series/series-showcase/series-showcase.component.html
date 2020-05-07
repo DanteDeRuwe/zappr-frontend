@@ -3,7 +3,7 @@
   <div class="scroll">
     <div class="showcase">
       <div class="series" *ngFor="let s of series">
-        <a [href]="'series/' + s.id" _target="blank">
+        <a [routerLink]="['/series', s.id]" _target="blank">
           <img
             *ngIf="s.imageUrl != null; else posternullTemplate"
             class="poster"

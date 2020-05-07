@@ -4,7 +4,7 @@ import { Series } from "../series.model";
 @Component({
   selector: "series-showcase",
   templateUrl: "./series-showcase.component.html",
-  styleUrls: ["./series-showcase.component.scss"]
+  styleUrls: ["./series-showcase.component.scss"],
 })
 export class SeriesShowcaseComponent implements OnInit {
   @Input() public showcaseTitle: string;
