@@ -77,7 +77,6 @@ export class SeriesdataService {
         }
       }
     `;
-    console.log(QUERY);
     return this._apollo
       .watchQuery<any>({ query: QUERY })
       .valueChanges.pipe(map((s) => s.data.seriesQuery.schedule));
