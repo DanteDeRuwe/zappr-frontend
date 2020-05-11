@@ -44,7 +44,7 @@ export class SeriesdataService {
       .valueChanges.pipe(map((s) => s.data.seriesQuery.get));
   }
 
-  search$(name: string): Observable<Series> {
+  search$(name: string): Observable<Series[]> {
     const QUERY = gql`
       query {
         seriesQuery {
