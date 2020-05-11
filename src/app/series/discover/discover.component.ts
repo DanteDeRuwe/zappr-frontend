@@ -13,6 +13,9 @@ export class DiscoverComponent implements OnInit {
   public today$: Observable<Series[]>;
   public thisweek$: Observable<Series[]>;
 
+  public searchresults: Series[];
+  public loading: boolean;
+
   constructor(private _seriesdataService: SeriesdataService) {}
 
   ngOnInit() {
