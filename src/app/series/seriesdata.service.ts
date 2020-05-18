@@ -98,4 +98,12 @@ export class SeriesdataService {
       .watchQuery<any>({ query: QUERY })
       .valueChanges.pipe(map((s) => s.data.seriesQuery.today));
   }
+
+  addSeriesToWatchList(series: Series) {
+    console.log(`You tried adding ${series.name} to watchlist`);
+  }
+
+  addSeriesToFavorites(series: Series) {
+    console.log(`You tried adding ${series.name} to favorites`);
+  }
 }

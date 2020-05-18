@@ -1,4 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
+import { Series } from "../series.model";
+import { SeriesdataService } from "../seriesdata.service";
 
 @Component({
   selector: "series-actions",
@@ -6,7 +8,17 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./series-actions.component.scss"],
 })
 export class SeriesActionsComponent implements OnInit {
-  constructor() {}
+  @Input() series: Series;
 
-  ngOnInit(): void {}
+  constructor(private _dataService: SeriesdataService) {}
+
+  ngOnInit() {}
+
+  addSeriesToWatchList() {
+    this._dataService.addSeriesToWatchList(this.series);
+  }
+
+  addSeriesToFavorites() {
+    this._dataService.addSeriesToFavorites(this.series);
+  }
 }

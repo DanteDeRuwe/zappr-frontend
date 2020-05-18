@@ -3,6 +3,8 @@
   <img *ngIf="s.imageUrl != null" class="poster" [src]="s?.imageUrl" />
   <div [innerHTML]="s.description"></div>
 
+  <series-actions [series]="s"></series-actions>
+
   <div>{{ s.airTime }}</div>
   <div>{{ s.averageRating }}</div>
   <div>{{ s.ended }}</div>
