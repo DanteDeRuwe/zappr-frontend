@@ -8,6 +8,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { SeriesModule } from "./series/series.module";
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { UsersModule } from './users/users.module';
 
 @NgModule({
   declarations: [AppComponent, MainLayoutComponent],
@@ -17,7 +18,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     GraphQLModule,
     HttpClientModule,
     SeriesModule,
-    NgbModule
+    NgbModule,
+    UsersModule
   ],
   providers: [],
   bootstrap: [AppComponent]
