@@ -1,6 +1,6 @@
 <section class="container is-fluid">
   <h1>{{ showcaseTitle }}</h1>
-  <div class="scroll">
+  <div class="scroll" *ngIf="series.length > 0; else noSeries">
     <div class="showcase">
       <div class="series" *ngFor="let s of series">
         <a [routerLink]="['/series', s.id]" _target="blank">
@@ -20,3 +20,7 @@
     </div>
   </div>
 </section>
+
+<ng-template #noSeries>
+  <p class="text-muted">No series ¯\_(ツ)_/¯</p>
+</ng-template>
