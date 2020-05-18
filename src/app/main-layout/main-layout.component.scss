@@ -1,16 +1,15 @@
 @import "~bootstrap/scss/bootstrap";
+@import "../../styles.scss";
 
-/* 
-* GRID
+/* GRID
 */
 #wrapper {
-  padding: 20px;
   display: grid;
   grid-template-areas:
     "nav content"
     "nav footer";
 
-  grid-template-columns: 200px 1fr;
+  grid-template-columns: 18rem 1fr;
   grid-template-rows: auto 20px;
   grid-gap: 20px;
 
@@ -34,8 +33,13 @@
 
 nav {
   grid-area: nav;
+  background-color: $nav-bg;
+  padding: 2rem;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
 }
+
 main {
+  padding: 20px;
   grid-area: content;
 }
 
