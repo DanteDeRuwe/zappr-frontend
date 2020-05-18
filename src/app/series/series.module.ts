@@ -5,6 +5,7 @@ import { SeriesDetailComponent } from "./series-detail/series-detail.component";
 import { SeriesShowcaseComponent } from "./series-showcase/series-showcase.component";
 import { RouterModule } from "@angular/router";
 import { SeriesSearchComponent } from "./series-search/series-search.component";
+import { SeriesActionsComponent } from "./series-actions/series-actions.component";
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { SeriesSearchComponent } from "./series-search/series-search.component";
     DiscoverComponent,
     SeriesDetailComponent,
     SeriesSearchComponent,
+    SeriesActionsComponent,
   ],
   imports: [CommonModule, RouterModule],
   exports: [DiscoverComponent],
