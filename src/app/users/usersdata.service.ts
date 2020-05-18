@@ -17,7 +17,9 @@ export class UsersdataService {
     query{
       userQuery{
         get(id: ${id}){
-          email, fullName, id
+          email, fullName, id,
+          watchListedSeries {id},
+          favoriteSeries {id}
         }
       }
     }
@@ -66,6 +68,6 @@ export class UsersdataService {
           seriesid: series.id,
         },
       })
-      .pipe(map((s) => s.data.userMutation.addSeriesToFavorites));
+      .pipe(map((s) => s.data.userMutation.addFavoriteSeries));
   }
 }

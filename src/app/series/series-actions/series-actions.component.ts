@@ -12,7 +12,7 @@ import { User } from "src/app/users/user.model";
 })
 export class SeriesActionsComponent implements OnInit {
   @Input() series: Series;
-  public result: Observable<User>;
+
   private _user: User;
 
   constructor(private _dataService: UsersdataService) {}
@@ -24,18 +24,18 @@ export class SeriesActionsComponent implements OnInit {
   }
 
   addSeriesToWatchList() {
-    this.result = this._dataService.addSeriesToWatchList(
+    let result = this._dataService.addSeriesToWatchList(
       this.series,
       this._user
     );
-    this.result.subscribe((x) => (this._user = x)); //subscribe or the mutation wont go through
+    result.subscribe((x) => (this._user = x)); //subscribe or the mutation wont go through
   }
 
   addSeriesToFavorites() {
-    this.result = this._dataService.addSeriesToFavorites(
+    let result = this._dataService.addSeriesToFavorites(
       this.series,
       this._user
     );
-    this.result.subscribe((x) => (this._user = x)); //subscribe or the mutation wont go through
+    result.subscribe((x) => (this._user = x)); //subscribe or the mutation wont go through
   }
 }
