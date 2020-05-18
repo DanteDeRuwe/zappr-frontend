@@ -16,6 +16,6 @@ import { SeriesActionsComponent } from "./series-actions/series-actions.componen
     SeriesActionsComponent,
   ],
   imports: [CommonModule, RouterModule],
-  exports: [DiscoverComponent],
+  exports: [],
 })
 export class SeriesModule {}
