@@ -35,7 +35,19 @@ export class SeriesActionsComponent implements OnInit {
 
   addSeriesToFavorites() {
     this._dataService
-      .addSeriesToFavorites(this.series.id, this.USER_ID)
+      .addFavoriteSeries(this.series.id, this.USER_ID)
+      .subscribe(); //subscribe or the mutation wont go through
+  }
+
+  removeSeriesFromWatchList() {
+    this._dataService
+      .removeSeriesFromWatchList(this.series.id, this.USER_ID)
+      .subscribe(); //subscribe or the mutation wont go through
+  }
+
+  removeSeriesFromFavorites() {
+    this._dataService
+      .removeFavoriteSeries(this.series.id, this.USER_ID)
       .subscribe(); //subscribe or the mutation wont go through
   }
 

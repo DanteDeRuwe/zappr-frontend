@@ -1,6 +1,7 @@
 <series-action
   [condition]="!(seriesIsFav$ | async)"
   (onClickWhileTrue)="addSeriesToFavorites()"
+  (onClickWhileFalse)="removeSeriesFromFavorites()"
 >
   <div conditionTrue>Add To Favorites</div>
   <div conditionFalse>Remove From Favorites</div>
@@ -9,6 +10,7 @@
 <series-action
   [condition]="!(seriesIsOnWL$ | async)"
   (onClickWhileTrue)="addSeriesToWatchList()"
+  (onClickWhileFalse)="removeSeriesFromWatchList()"
 >
   <div conditionTrue>Add To Watchlist</div>
   <div conditionFalse>Remove From Watchlist</div>

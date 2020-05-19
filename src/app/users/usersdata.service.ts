@@ -54,7 +54,7 @@ export class UsersdataService {
       .pipe(map((s) => s.data.userMutation.addSeriesToWatchList));
   }
 
-  addSeriesToFavorites(seriesid: number, userid: number): Observable<User> {
+  addFavoriteSeries(seriesid: number, userid: number): Observable<User> {
     const MUTATION = gql`
       mutation addFavoriteSeries($userid: Int!, $seriesid: Int!) {
         userMutation {
@@ -76,5 +76,56 @@ export class UsersdataService {
         },
       })
       .pipe(map((s) => s.data.userMutation.addFavoriteSeries));
+  }
+
+  removeSeriesFromWatchList(
+    seriesid: number,
+    userid: number
+  ): Observable<User> {
+    const MUTATION = gql`
+      mutation removeSeriesFromWatchList($userid: Int!, $seriesid: Int!) {
+        userMutation {
+          removeSeriesFromWatchList(userId: $userid, seriesId: $seriesid) {
+            id
+            watchListedSeries {
+              id
+            }
+          }
+        }
+      }
+    `;
+    return this._apollo
+      .mutate<any>({
+        mutation: MUTATION,
+        variables: {
+          userid,
+          seriesid,
+        },
+      })
+      .pipe(map((s) => s.data.userMutation.removeSeriesFromWatchList));
+  }
+
+  removeFavoriteSeries(seriesid: number, userid: number): Observable<User> {
+    const MUTATION = gql`
+      mutation removeFavoriteSeries($userid: Int!, $seriesid: Int!) {
+        userMutation {
+          removeFavoriteSeries(userId: $userid, seriesId: $seriesid) {
+            id
+            favoriteSeries {
+              id
+            }
+          }
+        }
+      }
+    `;
+    return this._apollo
+      .mutate<any>({
+        mutation: MUTATION,
+        variables: {
+          userid: userid,
+          seriesid: seriesid,
+        },
+      })
+      .pipe(map((s) => s.data.userMutation.removeFavoriteSeries));
   }
 }
