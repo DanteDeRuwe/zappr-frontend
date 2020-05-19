@@ -16,19 +16,15 @@ export class SeriesActionsComponent implements OnInit {
 
   USER_ID: number = 1; //todo, user is hardcoded
   user$: Observable<User>;
-  seriesIsOnWL$: Observable<Boolean>;
   seriesIsFav$: Observable<boolean>;
+  seriesIsOnWL$: Observable<boolean>;
 
   constructor(private _dataService: UsersdataService) {}
 
   ngOnInit() {
     this.user$ = this._dataService.get$(this.USER_ID);
-    this.seriesIsOnWL$ = this.user$.pipe(
-      map((u) => !u.watchListedSeries.every((s) => s.id != this.series.id))
-    );
-    this.seriesIsFav$ = this.user$.pipe(
-      map((u) => !u.favoriteSeries.every((s) => s.id != this.series.id))
-    );
+    this.seriesIsFav$ = this.isOnList$("favoriteSeries");
+    this.seriesIsOnWL$ = this.isOnList$("watchListedSeries");
   }
 
   addSeriesToWatchList() {
@@ -41,5 +37,11 @@ export class SeriesActionsComponent implements OnInit {
     this._dataService
       .addSeriesToFavorites(this.series.id, this.USER_ID)
       .subscribe(); //subscribe or the mutation wont go through
+  }
+
+  private isOnList$(userlistKey: string): Observable<boolean> {
+    return this.user$.pipe(
+      map((u) => !u[userlistKey].every((s) => s.id != this.series.id))
+    );
   }
 }

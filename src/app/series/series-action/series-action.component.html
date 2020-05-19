@@ -1,0 +1,13 @@
+<button
+  *ngIf="condition; else notCondition"
+  class="btn btn-primary"
+  (click)="this.onActionClick.emit()"
+>
+  {{ ifTrue }}
+</button>
+
+<ng-template #notCondition>
+  <button class="btn btn-danger">
+    {{ ifFalse }}
+  </button>
+</ng-template>
