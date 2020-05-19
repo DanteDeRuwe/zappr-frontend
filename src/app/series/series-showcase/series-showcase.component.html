@@ -1,6 +1,24 @@
-<section class="container is-fluid">
-  <h1>{{ showcaseTitle }}</h1>
-  <div class="scroll" *ngIf="series && series.length > 0; else noSeries">
+<section>
+  <header>
+    <h1>{{ showcaseTitle }}</h1>
+    <a
+      *ngIf="!this.full"
+      class="see-more-or-less"
+      (click)="this.full = !this.full"
+      >See more...</a
+    >
+    <a
+      *ngIf="this.full"
+      class="see-more-or-less"
+      (click)="this.full = !this.full"
+      >See less...</a
+    >
+  </header>
+
+  <div
+    [class]="this.full ? '' : 'scroll'"
+    *ngIf="series && series.length > 0; else noSeries"
+  >
     <div class="showcase">
       <div class="series" *ngFor="let s of series">
         <a [routerLink]="['/series', s.id]" _target="blank">

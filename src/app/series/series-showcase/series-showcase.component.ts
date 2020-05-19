@@ -7,8 +7,9 @@ import { Series } from "../series.model";
   styleUrls: ["./series-showcase.component.scss"],
 })
 export class SeriesShowcaseComponent implements OnInit {
-  @Input() public showcaseTitle: string;
-  @Input() public series: Series[];
+  @Input() showcaseTitle: string;
+  @Input() series: Series[];
+  @Input() full: boolean;
 
   constructor() {}
 

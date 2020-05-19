@@ -41,6 +41,13 @@ nav {
 main {
   padding: 50px;
   grid-area: content;
+  max-width: calc(100vw - 25rem);
+}
+
+@include media-breakpoint-down(sm) {
+  main {
+    max-width: calc(100vw - 2rem);
+  }
 }
 
 footer {
