@@ -19,7 +19,7 @@ export class DiscoverComponent implements OnInit {
   constructor(private _seriesdataService: SeriesdataService) {}
 
   ngOnInit() {
-    this.today$ = this._seriesdataService.today$("BE");
-    this.thisweek$ = this._seriesdataService.schedule$("BE", 1, 7);
+    this.today$ = this._seriesdataService.today$("US");
+    this.thisweek$ = this._seriesdataService.schedule$("US", 1, 7);
   }
 }
