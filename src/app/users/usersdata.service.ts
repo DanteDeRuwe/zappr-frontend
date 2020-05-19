@@ -1,19 +1,22 @@
 import { Injectable } from "@angular/core";
+import { Apollo } from "apollo-angular";
+import { DocumentNode } from "graphql";
 import gql from "graphql-tag";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { Apollo, QueryRef } from "apollo-angular";
-import { Series } from "../series/series.model";
+
 import { User } from "./user.model";
 
 @Injectable({
   providedIn: "root",
 })
 export class UsersdataService {
+  private _getUserQuery: DocumentNode;
+
   constructor(private _apollo: Apollo) {}
 
-  getBasicInfo$(id: number): Observable<User> {
-    const QUERY = gql`
+  get$(id: number): Observable<User> {
+    this._getUserQuery = gql`
     query{
       userQuery{
         get(id: ${id}){
@@ -25,11 +28,11 @@ export class UsersdataService {
     }
     `;
     return this._apollo
-      .watchQuery<any>({ query: QUERY })
+      .watchQuery<any>({ query: this._getUserQuery })
       .valueChanges.pipe(map((s) => s.data.userQuery.get));
   }
 
-  addSeriesToWatchList(series: Series, user: User): Observable<User> {
+  addSeriesToWatchList(seriesid: number, userid: number): Observable<User> {
     const MUTATION = gql`
       mutation addSeriesToWatchList($userid: Int!, $seriesid: Int!) {
         userMutation {
@@ -43,14 +46,15 @@ export class UsersdataService {
       .mutate<any>({
         mutation: MUTATION,
         variables: {
-          userid: user.id,
-          seriesid: series.id,
+          userid,
+          seriesid,
         },
+        refetchQueries: [{ query: this._getUserQuery }],
       })
       .pipe(map((s) => s.data.userMutation.addSeriesToWatchList));
   }
 
-  addSeriesToFavorites(series: Series, user: User): Observable<User> {
+  addSeriesToFavorites(seriesid: number, userid: number): Observable<User> {
     const MUTATION = gql`
       mutation addFavoriteSeries($userid: Int!, $seriesid: Int!) {
         userMutation {
@@ -64,9 +68,10 @@ export class UsersdataService {
       .mutate<any>({
         mutation: MUTATION,
         variables: {
-          userid: user.id,
-          seriesid: series.id,
+          userid: userid,
+          seriesid: seriesid,
         },
+        refetchQueries: [{ query: this._getUserQuery }],
       })
       .pipe(map((s) => s.data.userMutation.addFavoriteSeries));
   }

@@ -1,7 +1,27 @@
-<button class="btn btn-primary" (click)="addSeriesToFavorites()">
+<button
+  *ngIf="!(seriesIsOnWL$ | async); else onWL"
+  class="btn btn-primary"
+  (click)="addSeriesToWatchList()"
+>
+  Add To WatchList
+</button>
+
+<ng-template #onWL>
+  <button class="btn btn-danger">
+    Remove From Watchlist
+  </button>
+</ng-template>
+
+<button
+  *ngIf="!(seriesIsFav$ | async); else isFav"
+  class="btn btn-primary"
+  (click)="addSeriesToFavorites()"
+>
   Add To Favorites
 </button>
 
-<button class="btn btn-primary" (click)="addSeriesToWatchList()">
-  Add To Watchlist
-</button>
+<ng-template #isFav>
+  <button class="btn btn-danger">
+    Remove From Favorites
+  </button>
+</ng-template>
