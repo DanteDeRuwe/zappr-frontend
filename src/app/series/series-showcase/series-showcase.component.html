@@ -1,43 +1,35 @@
 <section>
   <header>
     <h1>{{ showcaseTitle }}</h1>
-    <a
-      *ngIf="!this.full"
-      class="see-more-or-less"
-      (click)="this.full = !this.full"
-      >See more...</a
-    >
-    <a
-      *ngIf="this.full"
-      class="see-more-or-less"
-      (click)="this.full = !this.full"
-      >See less...</a
-    >
+    <a class="see-more-or-less" (click)="this.full = !this.full">See {{ this.full ? "less" : "more" }}...</a>
   </header>
 
-  <div
-    [class]="this.full ? 'full' : 'scroll'"
-    *ngIf="series && series.length > 0; else noSeries"
-  >
-    <div class="showcase">
-      <div class="series" *ngFor="let s of series">
-        <a [routerLink]="['/series', s.id]" _target="blank">
-          <img
-            *ngIf="s.imageUrl != null; else posternullTemplate"
-            class="poster"
-            [src]="s?.imageUrl"
-          />
-          <ng-template #posternullTemplate>
-            <div class="poster poster-not-found"></div>
-          </ng-template>
-        </a>
-        <div class="series-name">
-          {{ s?.name }}
-        </div>
-      </div>
+  <div *ngIf="this.series && this.series.length > 0; else noSeries">
+    <!-- Scroll -->
+    <drag-scroll *ngIf="!this.full" [scrollbar-hidden]="true" [drag-scroll-y-disabled]="true">
+      <ng-content drag-scroll-item *ngTemplateOutlet="seriesPosters"></ng-content>
+    </drag-scroll>
+
+    <!-- Full -->
+    <div *ngIf="this.full">
+      <ng-content *ngTemplateOutlet="seriesPosters"></ng-content>
     </div>
   </div>
 </section>
+
+<ng-template #seriesPosters>
+  <div class="series" *ngFor="let s of series">
+    <a [routerLink]="['/series', s.id]" _target="blank">
+      <img *ngIf="s.imageUrl != null; else posternullTemplate" class="poster" [src]="s?.imageUrl" />
+      <ng-template #posternullTemplate>
+        <div class="poster poster-not-found"></div>
+      </ng-template>
+    </a>
+    <div class="series-name">
+      {{ s?.name }}
+    </div>
+  </div>
+</ng-template>
 
 <ng-template #noSeries>
   <p class="text-muted">No series ¯\_(ツ)_/¯</p>

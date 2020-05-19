@@ -1,11 +1,9 @@
+$img-height: 200px;
+$img-width: ($img-height / 4) * 3;
+
 section {
   margin: 0;
   width: 100%;
-
-  .scroll {
-    overflow-x: auto;
-    white-space: nowrap;
-  }
 
   header {
     margin: 1.5rem 0;
@@ -28,8 +26,8 @@ section {
 
   .series {
     display: inline-block;
-    width: 150px;
-    height: 225px;
+    height: $img-height;
+    width: $img-width;
     margin: 0 1rem 0rem 0;
 
     .poster {
@@ -42,8 +40,8 @@ section {
     }
 
     .series-name {
-      width: 150px;
-      max-width: 150px;
+      width: $img-width;
+      max-width: $img-width;
       position: relative;
       bottom: 2rem;
       z-index: 2;
@@ -62,4 +60,8 @@ section {
       transition: ease 0.2s;
     }
   }
+}
+
+drag-scroll {
+  height: $img-height;
 }

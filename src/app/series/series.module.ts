@@ -8,6 +8,7 @@ import { SeriesSearchComponent } from "./series-search/series-search.component";
 import { SeriesActionsComponent } from "./series-actions/series-actions.component";
 import { SeriesActionComponent } from "./series-action/series-action.component";
 import { FavoriteSeriesComponent } from "./favorite-series/favorite-series.component";
+import { DragScrollModule } from "ngx-drag-scroll";
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { FavoriteSeriesComponent } from "./favorite-series/favorite-series.compo
     SeriesActionComponent,
     FavoriteSeriesComponent,
   ],
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, DragScrollModule],
   exports: [],
 })
 export class SeriesModule {}
