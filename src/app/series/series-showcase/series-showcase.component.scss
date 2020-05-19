@@ -24,33 +24,36 @@ section {
     }
   }
 
+  .noscroll {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  drag-scroll {
+    height: $img-height * 1.2;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+  }
+
   .series {
-    display: inline-block;
     height: $img-height;
     width: $img-width;
-    margin: 0 1rem 0rem 0;
+    margin: 1rem 1rem 0 0;
 
     .poster {
-      display: inline-block;
-      width: 100%;
-      height: 100%;
+      width: $img-width;
+      height: $img-height;
     }
     .poster-not-found {
       background-color: #1b1b1b;
-    }
-
-    .series-name {
-      width: $img-width;
-      max-width: $img-width;
-      position: relative;
-      bottom: 2rem;
-      z-index: 2;
-      text-align: center;
-      transition: 0.5s;
-
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      font-size: 2rem;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
     }
 
     transition: ease 0.2s;
@@ -60,8 +63,4 @@ section {
       transition: ease 0.2s;
     }
   }
-}
-
-drag-scroll {
-  height: $img-height;
 }
