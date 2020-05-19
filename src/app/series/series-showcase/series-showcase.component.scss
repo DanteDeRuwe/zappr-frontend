@@ -1,8 +1,9 @@
 section {
   margin: 0;
   width: 100%;
+
   .scroll {
-    overflow-x: scroll;
+    overflow-x: auto;
     white-space: nowrap;
   }
 
@@ -11,14 +12,17 @@ section {
     position: sticky;
     width: 100%;
     height: 3rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
     h1 {
       font-size: 2.4rem;
+      margin: 0;
       width: fit-content;
-      float: left;
     }
     .see-more-or-less {
       cursor: pointer;
-      float: right;
     }
   }
 

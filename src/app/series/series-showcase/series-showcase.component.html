@@ -16,7 +16,7 @@
   </header>
 
   <div
-    [class]="this.full ? '' : 'scroll'"
+    [class]="this.full ? 'full' : 'scroll'"
     *ngIf="series && series.length > 0; else noSeries"
   >
     <div class="showcase">

@@ -6,6 +6,7 @@ import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 
 import { User } from "./user.model";
+import { Series } from "../series/series.model";
 
 @Injectable({
   providedIn: "root",
@@ -28,6 +29,26 @@ export class UsersdataService {
     return this._apollo
       .watchQuery<any>({ query: QUERY })
       .valueChanges.pipe(map((s) => s.data.userQuery.get));
+  }
+
+  getFavorites$(id: number): Observable<Series[]> {
+    const QUERY = gql`
+    query{
+      userQuery{
+        get(id: ${id}){
+          email, fullName, id,
+          favoriteSeries {
+            id
+            name
+            imageUrl
+          }
+        }
+      }
+    }
+    `;
+    return this._apollo
+      .watchQuery<any>({ query: QUERY })
+      .valueChanges.pipe(map((s) => s.data.userQuery.get.favoriteSeries));
   }
 
   addSeriesToWatchList(seriesid: number, userid: number): Observable<User> {

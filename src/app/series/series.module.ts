@@ -7,6 +7,7 @@ import { RouterModule } from "@angular/router";
 import { SeriesSearchComponent } from "./series-search/series-search.component";
 import { SeriesActionsComponent } from "./series-actions/series-actions.component";
 import { SeriesActionComponent } from "./series-action/series-action.component";
+import { FavoriteSeriesComponent } from "./favorite-series/favorite-series.component";
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { SeriesActionComponent } from "./series-action/series-action.component";
     SeriesSearchComponent,
     SeriesActionsComponent,
     SeriesActionComponent,
+    FavoriteSeriesComponent,
   ],
   imports: [CommonModule, RouterModule],
   exports: [],
