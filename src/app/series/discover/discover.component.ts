@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
 
-import { SeriesdataService } from "../seriesdata.service";
 import { Series } from "../series.model";
+import { SeriesdataService } from "../seriesdata.service";
 
 @Component({
   selector: "discover",

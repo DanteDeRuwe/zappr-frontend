@@ -1,8 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { SeriesdataService } from "../seriesdata.service";
 import { Observable } from "rxjs";
+
 import { Series } from "../series.model";
+import { SeriesdataService } from "../seriesdata.service";
 
 @Component({
   selector: "series-detail",

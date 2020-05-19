@@ -6,9 +6,9 @@ import { AppComponent } from "./app.component";
 import { GraphQLModule } from "./graphql.module";
 import { HttpClientModule } from "@angular/common/http";
 import { SeriesModule } from "./series/series.module";
-import { MainLayoutComponent } from './main-layout/main-layout.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { UsersModule } from './users/users.module';
+import { MainLayoutComponent } from "./main-layout/main-layout.component";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { UsersModule } from "./users/users.module";
 
 @NgModule({
   declarations: [AppComponent, MainLayoutComponent],
@@ -19,9 +19,9 @@ import { UsersModule } from './users/users.module';
     HttpClientModule,
     SeriesModule,
     NgbModule,
-    UsersModule
+    UsersModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

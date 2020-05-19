@@ -6,7 +6,7 @@ import {
   Output,
   ViewChild,
 } from "@angular/core";
-import { fromEvent, Observable } from "rxjs";
+import { fromEvent } from "rxjs";
 import {
   debounceTime,
   distinctUntilChanged,

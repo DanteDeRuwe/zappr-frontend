@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
 import { User } from "src/app/users/user.model";
 import { UsersdataService } from "src/app/users/usersdata.service";
 
 import { Series } from "../series.model";
-import { map } from "rxjs/operators";
 
 @Component({
   selector: "series-actions",
@@ -30,30 +30,30 @@ export class SeriesActionsComponent implements OnInit {
   addSeriesToWatchList() {
     this._dataService
       .addSeriesToWatchList(this.series.id, this.USER_ID)
-      .subscribe(); //subscribe or the mutation wont go through
+      .subscribe();
   }
 
   addSeriesToFavorites() {
     this._dataService
       .addFavoriteSeries(this.series.id, this.USER_ID)
-      .subscribe(); //subscribe or the mutation wont go through
+      .subscribe();
   }
 
   removeSeriesFromWatchList() {
     this._dataService
       .removeSeriesFromWatchList(this.series.id, this.USER_ID)
-      .subscribe(); //subscribe or the mutation wont go through
+      .subscribe();
   }
 
   removeSeriesFromFavorites() {
     this._dataService
       .removeFavoriteSeries(this.series.id, this.USER_ID)
-      .subscribe(); //subscribe or the mutation wont go through
+      .subscribe();
   }
 
   private seriesIsOnList$(userlistKey: string): Observable<boolean> {
     return this.user$.pipe(
-      map((u) => !u[userlistKey].every((s) => s.id != this.series.id))
+      map((u) => !u[userlistKey].every((s: Series) => s.id != this.series.id))
     );
   }
 }

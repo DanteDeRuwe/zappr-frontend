@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { UsersdataService } from "src/app/users/usersdata.service";
 import { Observable } from "rxjs";
-import { User } from "src/app/users/user.model";
+import { UsersdataService } from "src/app/users/usersdata.service";
+
 import { Series } from "../series.model";
 
 @Component({
