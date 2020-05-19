@@ -1,9 +1,12 @@
 <div *ngIf="series$ | async as s" class="series-grid-container">
-  <h1 class="series-title">{{ s.name }}</h1>
-  <img class="series-img" *ngIf="s.imageUrl != null" [src]="s?.imageUrl" />
-  <div class="series-description" [innerHTML]="s.description"></div>
+  <header class="series-title">
+    <h1>{{ s.name }}</h1>
+  </header>
 
   <series-actions class="series-actions" [series]="s"></series-actions>
+
+  <img class="series-img" *ngIf="s.imageUrl != null" [src]="s?.imageUrl" />
+  <div class="series-description" [innerHTML]="s.description"></div>
 
   <div class="series-extra-info">
     <h2>Info</h2>
@@ -34,6 +37,6 @@
   </div>
 
   <ng-template #noComments
-    ><p class="text-muted">No comments yet</p></ng-template
+    ><p class="series-comments text-muted mt-5">No comments yet</p></ng-template
   >
 </div>

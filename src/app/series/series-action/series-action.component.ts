@@ -7,6 +7,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 })
 export class SeriesActionComponent implements OnInit {
   @Input() condition: boolean;
+  @Input() class: string[] = ["", ""];
   @Output() onClickWhileTrue: EventEmitter<any> = new EventEmitter();
   @Output() onClickWhileFalse: EventEmitter<any> = new EventEmitter();
 

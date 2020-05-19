@@ -1,13 +1,13 @@
 .series-grid-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 5rem repeat(3, auto);
-  gap: 0 0;
+  grid-template-rows: 5rem repeat(3, 1fr);
+  gap: 1rem 2rem;
   grid-template-areas:
-    "series-title             series-title          series-title          series-title"
+    "series-title             series-title          series-title          series-actions"
     "series-description       series-description    series-description    series-img"
-    "series-extra-info        series-actions        series-actions        series-img"
-    "series-comments          series-comments       series-comments       series-comments";
+    "series-extra-info        series-comments       series-comments       series-img"
+    "series-extra-info        series-comments       series-comments       nothing";
 }
 
 .series-title {
@@ -27,7 +27,9 @@
   grid-area: series-actions;
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: space-evenly;
+  margin-bottom: 2rem;
 }
 
 .series-extra-info {

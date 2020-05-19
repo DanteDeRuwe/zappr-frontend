@@ -1,13 +1,13 @@
 <button
   *ngIf="condition; else notCondition"
-  class="btn btn-primary"
   (click)="this.onClickWhileTrue.emit()"
+  [class]="this.class[1]"
 >
   <ng-content select="[conditionTrue]"></ng-content>
 </button>
 
 <ng-template #notCondition>
-  <button class="btn btn-danger" (click)="this.onClickWhileFalse.emit()">
+  <button [class]="this.class[0]" (click)="this.onClickWhileFalse.emit()">
     <ng-content select="[conditionFalse]"></ng-content>
   </button>
 </ng-template>
