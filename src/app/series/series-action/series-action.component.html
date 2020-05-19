@@ -1,8 +1,4 @@
-<button
-  *ngIf="condition; else notCondition"
-  (click)="this.onClickWhileTrue.emit()"
-  [class]="this.class[1]"
->
+<button *ngIf="condition; else notCondition" (click)="this.onClickWhileTrue.emit()" [class]="this.class[1]">
   <ng-content select="[conditionTrue]"></ng-content>
 </button>
 

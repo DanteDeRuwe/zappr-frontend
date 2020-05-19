@@ -1,25 +1,13 @@
-<series-search
-  (results)="this.searchresults = $event"
-  (loading)="this.loading = $event"
-></series-search>
+<series-search (results)="this.searchresults = $event" (loading)="this.loading = $event"></series-search>
 
 <div *ngIf="loading" class="spinner-border" role="status">
   <span class="sr-only">Loading...</span>
 </div>
 
 <div *ngIf="!loading && this.searchresults && this.searchresults.length > 0">
-  <series-showcase
-    showcaseTitle="Results"
-    [series]="this.searchresults"
-  ></series-showcase>
+  <series-showcase showcaseTitle="Results" [series]="this.searchresults"></series-showcase>
 </div>
 
-<series-showcase
-  showcaseTitle="Today"
-  [series]="today$ | async"
-></series-showcase>
+<series-showcase showcaseTitle="Today" [series]="today$ | async"></series-showcase>
 
-<series-showcase
-  showcaseTitle="Next 7 days"
-  [series]="thisweek$ | async"
-></series-showcase>
+<series-showcase showcaseTitle="Next 7 days" [series]="thisweek$ | async"></series-showcase>

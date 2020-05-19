@@ -15,28 +15,18 @@
     <div *ngIf="s.ended">Series ended</div>
     <div *ngIf="s.genres?.length > 0">Genres: {{ s.genres.join(", ") }}</div>
     <div>Network: {{ s.network }}</div>
-    <div>
-      {{ s.numberOfSeasons }} season{{ s.numberOfSeasons > 1 ? "s" : "" }}
-    </div>
+    <div>{{ s.numberOfSeasons }} season{{ s.numberOfSeasons > 1 ? "s" : "" }}</div>
     <div>Premiered {{ s.premiered }}</div>
-    <a
-      *ngIf="s.officialSite"
-      [href]="s.officialSite"
-      class="btn btn-outline-secondary"
-      target="_blank"
-      >Official website</a
-    >
+    <a *ngIf="s.officialSite" [href]="s.officialSite" class="btn btn-outline-secondary" target="_blank">Official website</a>
   </div>
 
   <div *ngIf="s.comments?.length > 0; else noComments" class="series-comments">
     <h2>Comments</h2>
     <div class="comment" *ngFor="let c of s.comments">
-      <b>{{ c.author.fullName }}</b
-      >{{ c.text }}
+      <b>{{ c.author.fullName }}</b>
+      {{ c.text }}
     </div>
   </div>
 
-  <ng-template #noComments
-    ><p class="series-comments text-muted mt-5">No comments yet</p></ng-template
-  >
+  <ng-template #noComments><p class="series-comments text-muted mt-5">No comments yet</p></ng-template>
 </div>
