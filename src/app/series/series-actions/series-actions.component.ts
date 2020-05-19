@@ -23,8 +23,8 @@ export class SeriesActionsComponent implements OnInit {
 
   ngOnInit() {
     this.user$ = this._dataService.get$(this.USER_ID);
-    this.seriesIsFav$ = this.isOnList$("favoriteSeries");
-    this.seriesIsOnWL$ = this.isOnList$("watchListedSeries");
+    this.seriesIsFav$ = this.seriesIsOnList$("favoriteSeries");
+    this.seriesIsOnWL$ = this.seriesIsOnList$("watchListedSeries");
   }
 
   addSeriesToWatchList() {
@@ -39,7 +39,7 @@ export class SeriesActionsComponent implements OnInit {
       .subscribe(); //subscribe or the mutation wont go through
   }
 
-  private isOnList$(userlistKey: string): Observable<boolean> {
+  private seriesIsOnList$(userlistKey: string): Observable<boolean> {
     return this.user$.pipe(
       map((u) => !u[userlistKey].every((s) => s.id != this.series.id))
     );
