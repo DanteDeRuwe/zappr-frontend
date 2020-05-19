@@ -1,15 +1,15 @@
 <series-action
-  (onActionClick)="addSeriesToFavorites()"
   [condition]="!(seriesIsFav$ | async)"
-  [ifTrue]="'Add To Favorites'"
-  [ifFalse]="'Remove From Favorites'"
+  (onClickWhileTrue)="addSeriesToFavorites()"
 >
+  <div conditionTrue>Add To Favorites</div>
+  <div conditionFalse>Remove From Favorites</div>
 </series-action>
 
 <series-action
-  (onActionClick)="addSeriesToWatchList()"
   [condition]="!(seriesIsOnWL$ | async)"
-  [ifTrue]="'Add To Watchlist'"
-  [ifFalse]="'Remove From Watchlist'"
+  (onClickWhileTrue)="addSeriesToWatchList()"
 >
+  <div conditionTrue>Add To Watchlist</div>
+  <div conditionFalse>Remove From Watchlist</div>
 </series-action>
