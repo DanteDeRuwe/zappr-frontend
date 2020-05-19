@@ -1,0 +1,39 @@
+.series-grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 5rem repeat(3, auto);
+  gap: 0 0;
+  grid-template-areas:
+    "series-title             series-title          series-title          series-title"
+    "series-description       series-description    series-description    series-img"
+    "series-extra-info        series-actions        series-actions        series-img"
+    "series-comments          series-comments       series-comments       series-comments";
+}
+
+.series-title {
+  grid-area: series-title;
+}
+
+.series-img {
+  width: 100%;
+  grid-area: series-img;
+}
+
+.series-description {
+  grid-area: series-description;
+}
+
+.series-actions {
+  grid-area: series-actions;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.series-extra-info {
+  grid-area: series-extra-info;
+}
+
+.series-comments {
+  grid-area: series-comments;
+}
