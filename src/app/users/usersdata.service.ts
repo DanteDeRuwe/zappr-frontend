@@ -11,12 +11,10 @@ import { User } from "./user.model";
   providedIn: "root",
 })
 export class UsersdataService {
-  private _getUserQuery: DocumentNode;
-
   constructor(private _apollo: Apollo) {}
 
   get$(id: number): Observable<User> {
-    this._getUserQuery = gql`
+    const QUERY = gql`
     query{
       userQuery{
         get(id: ${id}){
@@ -28,7 +26,7 @@ export class UsersdataService {
     }
     `;
     return this._apollo
-      .watchQuery<any>({ query: this._getUserQuery })
+      .watchQuery<any>({ query: QUERY })
       .valueChanges.pipe(map((s) => s.data.userQuery.get));
   }
 
@@ -38,6 +36,9 @@ export class UsersdataService {
         userMutation {
           addSeriesToWatchList(userId: $userid, seriesId: $seriesid) {
             id
+            watchListedSeries {
+              id
+            }
           }
         }
       }
@@ -49,7 +50,6 @@ export class UsersdataService {
           userid,
           seriesid,
         },
-        refetchQueries: [{ query: this._getUserQuery }],
       })
       .pipe(map((s) => s.data.userMutation.addSeriesToWatchList));
   }
@@ -60,6 +60,9 @@ export class UsersdataService {
         userMutation {
           addFavoriteSeries(userId: $userid, seriesId: $seriesid) {
             id
+            favoriteSeries {
+              id
+            }
           }
         }
       }
@@ -71,7 +74,6 @@ export class UsersdataService {
           userid: userid,
           seriesid: seriesid,
         },
-        refetchQueries: [{ query: this._getUserQuery }],
       })
       .pipe(map((s) => s.data.userMutation.addFavoriteSeries));
   }
