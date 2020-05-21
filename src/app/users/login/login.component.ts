@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { GraphQLError } from "graphql";
 
 import { UsersdataService } from "../usersdata.service";
-import { Router } from "@angular/router";
 
 @Component({
   selector: "app-login",
@@ -16,8 +15,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private _dataService: UsersdataService,
-    private _router: Router
+    private _dataService: UsersdataService
   ) {}
 
   ngOnInit() {
@@ -31,9 +29,7 @@ export class LoginComponent implements OnInit {
     this._dataService
       .login$(this.loginForm.value.email, this.loginForm.value.password)
       .subscribe(
-        (token) => {
-          this._dataService.auth(token);
-        },
+        (token) => this._dataService.authenticate(token),
         (error: GraphQLError) =>
           (this.errorMessage = error.message.replace("GraphQL error: ", ""))
       );

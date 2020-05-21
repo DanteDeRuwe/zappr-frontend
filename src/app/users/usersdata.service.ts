@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { Apollo } from "apollo-angular";
-import { DocumentNode } from "graphql";
 import gql from "graphql-tag";
 import { Observable, BehaviorSubject } from "rxjs";
 import { map } from "rxjs/operators";
@@ -13,7 +12,7 @@ import { Router } from "@angular/router";
   providedIn: "root",
 })
 export class UsersdataService {
-  private _token$: BehaviorSubject<string>;
+  private _authenticated$: BehaviorSubject<boolean>;
   redirectUrl: string = "";
 
   constructor(private _apollo: Apollo, private _router: Router) {
@@ -24,27 +23,27 @@ export class UsersdataService {
       parsedToken = null;
     }
 
-    this._token$ = new BehaviorSubject<string>(parsedToken);
-
-    console.log("auth: " + parsedToken);
-    this._token$.subscribe(console.log);
+    this._authenticated$ = new BehaviorSubject<boolean>(!!parsedToken);
   }
 
-  get token$() {
-    return this._token$;
+  authenticate(token: string) {
+    this._authenticated$.next(!!token);
+    if (token) localStorage.setItem("token", token);
+
+    this._router.navigate([this.redirectUrl]);
+    this.redirectUrl = "";
   }
 
-  auth(token: string) {
-    this._token$.next(token);
-    localStorage.setItem("token", token);
-    if (this.redirectUrl) this._router.navigate([this.redirectUrl]);
+  logout() {
+    if (this._authenticated$.getValue()) {
+      localStorage.removeItem("token");
+      this._authenticated$.next(false);
+    }
   }
 
-  get token(): string {
-    const t = localStorage.getItem("token");
-    return !!t ? t : "";
-  }
-
+  /*
+   * GraphQL
+   */
   register$(
     email: string,
     password: string,
@@ -85,13 +84,6 @@ export class UsersdataService {
         },
       })
       .pipe(map((s) => s.data.userMutation.login));
-  }
-
-  logout() {
-    if (this.token$.getValue()) {
-      localStorage.removeItem("token");
-      this._token$.next(null);
-    }
   }
 
   me$(): Observable<User> {
@@ -231,7 +223,24 @@ export class UsersdataService {
       .pipe(map((s) => s.data.userMutation.removeFavoriteSeries));
   }
 
-  parseJwt(token: string) {
+  /*
+   * Getters
+   */
+
+  get token(): string {
+    const t = localStorage.getItem("token");
+    return !!t ? t : "";
+  }
+
+  get authenticated$() {
+    return this._authenticated$;
+  }
+
+  /*
+   * Getters
+   */
+
+  private parseJwt(token: string) {
     if (!token) return { parsedToken: null, expires: null };
     const base64Token = token.split(".")[1];
     const base64 = base64Token.replace(/-/g, "+").replace(/_/g, "/");
