@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     this._dataService
       .login$(this.loginForm.value.email, this.loginForm.value.password)
       .subscribe(
-        (token) => console.log(token),
+        (token) => localStorage.setItem("token", token),
         (error: GraphQLError) =>
           (this.errorMessage = error.message.replace("GraphQL error: ", ""))
       );

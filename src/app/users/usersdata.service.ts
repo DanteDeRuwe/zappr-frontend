@@ -14,6 +14,11 @@ import { Series } from "../series/series.model";
 export class UsersdataService {
   constructor(private _apollo: Apollo) {}
 
+  get token(): string {
+    const t = localStorage.getItem("token");
+    return !!t ? t : "";
+  }
+
   register$(
     email: string,
     password: string,
@@ -37,7 +42,7 @@ export class UsersdataService {
       .pipe(map((s) => s.data.userMutation.login));
   }
 
-  login$(email: string, password: string): Observable<String> {
+  login$(email: string, password: string): Observable<string> {
     const MUTATION = gql`
       mutation login($email: String!, $password: String!) {
         userMutation {
