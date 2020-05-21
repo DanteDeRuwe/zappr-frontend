@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
-    if (this._dataService.authenticated$.getValue()) {
+    if (this._dataService.authenticated) {
       return true;
     }
     this._dataService.redirectUrl = state.url;

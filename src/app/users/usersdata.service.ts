@@ -44,6 +44,7 @@ export class UsersdataService {
   /*
    * GraphQL
    */
+
   register$(
     email: string,
     password: string,
@@ -232,8 +233,8 @@ export class UsersdataService {
     return !!t ? t : "";
   }
 
-  get authenticated$() {
-    return this._authenticated$;
+  get authenticated() {
+    return this._authenticated$.getValue();
   }
 
   /*
