@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { GraphQLError } from "graphql";
 
 import { UsersdataService } from "../usersdata.service";
 
@@ -28,8 +29,9 @@ export class LoginComponent implements OnInit {
     this._dataService
       .login$(this.loginForm.value.email, this.loginForm.value.password)
       .subscribe(
-        (res) => console.log(res),
-        (error) => console.log(error.message)
+        (token) => console.log(token),
+        (error: GraphQLError) =>
+          (this.errorMessage = error.message.replace("GraphQL error: ", ""))
       );
   }
 }
