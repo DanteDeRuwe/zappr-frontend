@@ -11,6 +11,7 @@ import { SeriesActionsComponent } from "./series-actions/series-actions.componen
 import { SeriesDetailComponent } from "./series-detail/series-detail.component";
 import { SeriesSearchComponent } from "./series-search/series-search.component";
 import { SeriesShowcaseComponent } from "./series-showcase/series-showcase.component";
+import { WatchlistComponent } from './watchlist/watchlist.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { SeriesShowcaseComponent } from "./series-showcase/series-showcase.compo
     SeriesActionsComponent,
     SeriesActionComponent,
     FavoriteSeriesComponent,
+    WatchlistComponent,
   ],
   imports: [CommonModule, RouterModule, DragScrollModule, NgbModule],
   exports: [],

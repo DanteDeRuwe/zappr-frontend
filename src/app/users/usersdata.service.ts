@@ -132,6 +132,28 @@ export class UsersdataService {
       .valueChanges.pipe(map((s) => s.data.userQuery.me.favoriteSeries));
   }
 
+  getWatchlist$(): Observable<Series[]> {
+    const QUERY = gql`
+      query {
+        userQuery {
+          me {
+            email
+            fullName
+            id
+            watchListedSeries {
+              id
+              name
+              imageUrl
+            }
+          }
+        }
+      }
+    `;
+    return this._apollo
+      .watchQuery<any>({ query: QUERY })
+      .valueChanges.pipe(map((s) => s.data.userQuery.me.watchListedSeries));
+  }
+
   addSeriesToWatchList$(seriesid: number): Observable<User> {
     const MUTATION = gql`
       mutation addSeriesToWatchList($seriesid: Int!) {

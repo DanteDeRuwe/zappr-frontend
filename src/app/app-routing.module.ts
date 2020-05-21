@@ -5,6 +5,7 @@ import { SeriesDetailComponent } from "./series/series-detail/series-detail.comp
 import { FavoriteSeriesComponent } from "./series/favorite-series/favorite-series.component";
 import { LoginComponent } from "./users/login/login.component";
 import { AuthGuard } from "./users/auth.guard";
+import { WatchlistComponent } from "./series/watchlist/watchlist.component";
 
 const routes: Routes = [
   { path: "discover", component: DiscoverComponent },
@@ -12,6 +13,11 @@ const routes: Routes = [
     path: "favorites",
     canActivate: [AuthGuard],
     component: FavoriteSeriesComponent,
+  },
+  {
+    path: "watchlist",
+    canActivate: [AuthGuard],
+    component: WatchlistComponent,
   },
   { path: "series/:id", component: SeriesDetailComponent },
   { path: "login", component: LoginComponent },
