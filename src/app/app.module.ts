@@ -10,9 +10,10 @@ import { MainLayoutComponent } from "./main-layout/main-layout.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { UsersModule } from "./users/users.module";
 import { httpInterceptorProviders } from "./interceptors";
+import { ProfileComponent } from "./profile/profile.component";
 
 @NgModule({
-  declarations: [AppComponent, MainLayoutComponent],
+  declarations: [AppComponent, MainLayoutComponent, ProfileComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

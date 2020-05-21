@@ -1,0 +1,17 @@
+@import "../../styles.scss";
+
+svg {
+  width: 1.5rem;
+  fill: $body-color;
+  margin-right: 1rem;
+}
+
+span {
+  margin-right: 1rem;
+  font-weight: lighter;
+}
+
+button,
+a {
+  display: block;
+}
