@@ -14,6 +14,6 @@ export class FavoriteSeriesComponent implements OnInit {
   constructor(private _dataService: UsersdataService) {}
 
   ngOnInit(): void {
-    this.series$ = this._dataService.getFavorites$(1);
+    this.series$ = this._dataService.getFavorites$();
   }
 }

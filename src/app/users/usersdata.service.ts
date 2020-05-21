@@ -14,48 +14,56 @@ import { Series } from "../series/series.model";
 export class UsersdataService {
   constructor(private _apollo: Apollo) {}
 
-  get$(id: number): Observable<User> {
+  me$(): Observable<User> {
     const QUERY = gql`
-    query{
-      userQuery{
-        get(id: ${id}){
-          email, fullName, id,
-          watchListedSeries {id},
-          favoriteSeries {id}
-        }
-      }
-    }
-    `;
-    return this._apollo
-      .watchQuery<any>({ query: QUERY })
-      .valueChanges.pipe(map((s) => s.data.userQuery.get));
-  }
-
-  getFavorites$(id: number): Observable<Series[]> {
-    const QUERY = gql`
-    query{
-      userQuery{
-        get(id: ${id}){
-          email, fullName, id,
-          favoriteSeries {
+      query {
+        userQuery {
+          me {
+            email
+            fullName
             id
-            name
-            imageUrl
+            watchListedSeries {
+              id
+            }
+            favoriteSeries {
+              id
+            }
           }
         }
       }
-    }
     `;
     return this._apollo
       .watchQuery<any>({ query: QUERY })
-      .valueChanges.pipe(map((s) => s.data.userQuery.get.favoriteSeries));
+      .valueChanges.pipe(map((s) => s.data.userQuery.me));
   }
 
-  addSeriesToWatchList(seriesid: number, userid: number): Observable<User> {
+  getFavorites$(): Observable<Series[]> {
+    const QUERY = gql`
+      query {
+        userQuery {
+          me {
+            email
+            fullName
+            id
+            favoriteSeries {
+              id
+              name
+              imageUrl
+            }
+          }
+        }
+      }
+    `;
+    return this._apollo
+      .watchQuery<any>({ query: QUERY })
+      .valueChanges.pipe(map((s) => s.data.userQuery.me.favoriteSeries));
+  }
+
+  addSeriesToWatchList$(seriesid: number): Observable<User> {
     const MUTATION = gql`
-      mutation addSeriesToWatchList($userid: Int!, $seriesid: Int!) {
+      mutation addSeriesToWatchList($seriesid: Int!) {
         userMutation {
-          addSeriesToWatchList(userId: $userid, seriesId: $seriesid) {
+          addSeriesToWatchList(seriesId: $seriesid) {
             id
             watchListedSeries {
               id
@@ -68,18 +76,17 @@ export class UsersdataService {
       .mutate<any>({
         mutation: MUTATION,
         variables: {
-          userid,
           seriesid,
         },
       })
       .pipe(map((s) => s.data.userMutation.addSeriesToWatchList));
   }
 
-  addFavoriteSeries(seriesid: number, userid: number): Observable<User> {
+  addFavoriteSeries$(seriesid: number): Observable<User> {
     const MUTATION = gql`
-      mutation addFavoriteSeries($userid: Int!, $seriesid: Int!) {
+      mutation addFavoriteSeries($seriesid: Int!) {
         userMutation {
-          addFavoriteSeries(userId: $userid, seriesId: $seriesid) {
+          addFavoriteSeries(seriesId: $seriesid) {
             id
             favoriteSeries {
               id
@@ -92,21 +99,17 @@ export class UsersdataService {
       .mutate<any>({
         mutation: MUTATION,
         variables: {
-          userid: userid,
           seriesid: seriesid,
         },
       })
       .pipe(map((s) => s.data.userMutation.addFavoriteSeries));
   }
 
-  removeSeriesFromWatchList(
-    seriesid: number,
-    userid: number
-  ): Observable<User> {
+  removeSeriesFromWatchList$(seriesid: number): Observable<User> {
     const MUTATION = gql`
-      mutation removeSeriesFromWatchList($userid: Int!, $seriesid: Int!) {
+      mutation removeSeriesFromWatchList($seriesid: Int!) {
         userMutation {
-          removeSeriesFromWatchList(userId: $userid, seriesId: $seriesid) {
+          removeSeriesFromWatchList(seriesId: $seriesid) {
             id
             watchListedSeries {
               id
@@ -119,18 +122,17 @@ export class UsersdataService {
       .mutate<any>({
         mutation: MUTATION,
         variables: {
-          userid,
           seriesid,
         },
       })
       .pipe(map((s) => s.data.userMutation.removeSeriesFromWatchList));
   }
 
-  removeFavoriteSeries(seriesid: number, userid: number): Observable<User> {
+  removeFavoriteSeries$(seriesid: number): Observable<User> {
     const MUTATION = gql`
-      mutation removeFavoriteSeries($userid: Int!, $seriesid: Int!) {
+      mutation removeFavoriteSeries($seriesid: Int!) {
         userMutation {
-          removeFavoriteSeries(userId: $userid, seriesId: $seriesid) {
+          removeFavoriteSeries(seriesId: $seriesid) {
             id
             favoriteSeries {
               id
@@ -143,7 +145,6 @@ export class UsersdataService {
       .mutate<any>({
         mutation: MUTATION,
         variables: {
-          userid: userid,
           seriesid: seriesid,
         },
       })

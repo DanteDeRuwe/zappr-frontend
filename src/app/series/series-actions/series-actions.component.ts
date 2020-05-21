@@ -14,7 +14,6 @@ import { Series } from "../series.model";
 export class SeriesActionsComponent implements OnInit {
   @Input() series: Series;
 
-  USER_ID: number = 1; //todo, user is hardcoded
   user$: Observable<User>;
   seriesIsFav$: Observable<boolean>;
   seriesIsOnWL$: Observable<boolean>;
@@ -22,33 +21,25 @@ export class SeriesActionsComponent implements OnInit {
   constructor(private _dataService: UsersdataService) {}
 
   ngOnInit() {
-    this.user$ = this._dataService.get$(this.USER_ID);
+    this.user$ = this._dataService.me$();
     this.seriesIsFav$ = this.seriesIsOnList$("favoriteSeries");
     this.seriesIsOnWL$ = this.seriesIsOnList$("watchListedSeries");
   }
 
   addSeriesToWatchList() {
-    this._dataService
-      .addSeriesToWatchList(this.series.id, this.USER_ID)
-      .subscribe();
+    this._dataService.addSeriesToWatchList$(this.series.id).subscribe();
   }
 
   addSeriesToFavorites() {
-    this._dataService
-      .addFavoriteSeries(this.series.id, this.USER_ID)
-      .subscribe();
+    this._dataService.addFavoriteSeries$(this.series.id).subscribe();
   }
 
   removeSeriesFromWatchList() {
-    this._dataService
-      .removeSeriesFromWatchList(this.series.id, this.USER_ID)
-      .subscribe();
+    this._dataService.removeSeriesFromWatchList$(this.series.id).subscribe();
   }
 
   removeSeriesFromFavorites() {
-    this._dataService
-      .removeFavoriteSeries(this.series.id, this.USER_ID)
-      .subscribe();
+    this._dataService.removeFavoriteSeries$(this.series.id).subscribe();
   }
 
   private seriesIsOnList$(userlistKey: string): Observable<boolean> {
