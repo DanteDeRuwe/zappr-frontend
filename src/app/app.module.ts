@@ -9,6 +9,7 @@ import { SeriesModule } from "./series/series.module";
 import { MainLayoutComponent } from "./main-layout/main-layout.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { UsersModule } from "./users/users.module";
+import { httpInterceptorProviders } from "./interceptors";
 
 @NgModule({
   declarations: [AppComponent, MainLayoutComponent],
@@ -21,7 +22,7 @@ import { UsersModule } from "./users/users.module";
     NgbModule,
     UsersModule,
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
