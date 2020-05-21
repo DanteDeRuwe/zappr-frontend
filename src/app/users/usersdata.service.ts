@@ -2,17 +2,43 @@ import { Injectable } from "@angular/core";
 import { Apollo } from "apollo-angular";
 import { DocumentNode } from "graphql";
 import gql from "graphql-tag";
-import { Observable } from "rxjs";
+import { Observable, BehaviorSubject } from "rxjs";
 import { map } from "rxjs/operators";
 
 import { User } from "./user.model";
 import { Series } from "../series/series.model";
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: "root",
 })
 export class UsersdataService {
-  constructor(private _apollo: Apollo) {}
+  private _token$: BehaviorSubject<string>;
+  redirectUrl: string = "";
+
+  constructor(private _apollo: Apollo, private _router: Router) {
+    let { parsedToken, expires } = this.parseJwt(localStorage.getItem("token"));
+
+    if (expires) {
+      localStorage.removeItem("token");
+      parsedToken = null;
+    }
+
+    this._token$ = new BehaviorSubject<string>(parsedToken);
+
+    console.log("auth: " + parsedToken);
+    this._token$.subscribe(console.log);
+  }
+
+  get token$() {
+    return this._token$;
+  }
+
+  auth(token: string) {
+    this._token$.next(token);
+    localStorage.setItem("token", token);
+    if (this.redirectUrl) this._router.navigate([this.redirectUrl]);
+  }
 
   get token(): string {
     const t = localStorage.getItem("token");
@@ -39,7 +65,7 @@ export class UsersdataService {
           user,
         },
       })
-      .pipe(map((s) => s.data.userMutation.login));
+      .pipe(map((s) => s.data.userMutation.register));
   }
 
   login$(email: string, password: string): Observable<string> {
@@ -59,6 +85,13 @@ export class UsersdataService {
         },
       })
       .pipe(map((s) => s.data.userMutation.login));
+  }
+
+  logout() {
+    if (this.token$.getValue()) {
+      localStorage.removeItem("token");
+      this._token$.next(null);
+    }
   }
 
   me$(): Observable<User> {
@@ -196,5 +229,16 @@ export class UsersdataService {
         },
       })
       .pipe(map((s) => s.data.userMutation.removeFavoriteSeries));
+  }
+
+  parseJwt(token: string) {
+    if (!token) return { parsedToken: null, expires: null };
+    const base64Token = token.split(".")[1];
+    const base64 = base64Token.replace(/-/g, "+").replace(/_/g, "/");
+    const parsedToken = JSON.parse(window.atob(base64));
+    const expires = !!parsedToken
+      ? new Date(parseInt(parsedToken.exp, 10) * 1000) < new Date()
+      : null;
+    return { parsedToken, expires };
   }
 }
