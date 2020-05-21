@@ -34,8 +34,47 @@
 nav {
   grid-area: nav;
   background-color: $nav-bg;
-  padding: 2rem;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+  padding-left: 2rem;
+  .navcontent {
+    position: sticky;
+    top: 2rem;
+  }
+  header {
+    font-size: 2.4rem;
+    font-family: Comfortaa, sans-serif;
+    padding-right: 2rem;
+    text-align: center;
+  }
+  ul {
+    list-style: none;
+    margin: 4rem 0;
+    padding: 0;
+
+    li {
+      svg {
+        width: 1.5rem !important;
+        fill: $body-color;
+        margin-right: 1rem;
+      }
+
+      a {
+        font-size: 1.5rem;
+        font-weight: lighter;
+        letter-spacing: 0.05rem;
+        display: block;
+        padding: 1rem 0 1rem 3rem;
+        margin-left: -2rem;
+        &:hover {
+          background-color: lighten($nav-bg, 5%);
+        }
+        &.active-nav {
+          background-color: $primary;
+          background: linear-gradient(to right, $primary 20%, $nav-bg);
+        }
+      }
+    }
+  }
 }
 
 main {
@@ -50,22 +89,8 @@ main {
   }
 }
 
-footer {
+main footer {
   align-self: end;
   grid-area: footer;
   padding-bottom: 1rem;
-}
-
-/*
-* NAV
-*/
-
-nav {
-  header {
-    font-size: 2rem;
-    font-family: Comfortaa, sans-serif;
-  }
-  ul {
-    list-style: none;
-  }
 }
