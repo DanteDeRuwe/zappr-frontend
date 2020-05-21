@@ -3,7 +3,7 @@
     <h1>{{ s.name }}</h1>
   </header>
 
-  <series-actions class="series-actions" [series]="s"></series-actions>
+  <series-actions *ngIf="this.authenticated" class="series-actions" [series]="s"></series-actions>
 
   <img class="series-img" *ngIf="s.imageUrl != null" [src]="s?.imageUrl" />
   <div class="series-description" [innerHTML]="s.description"></div>
