@@ -17,3 +17,16 @@ a:hover {
   color: $body-color !important;
   text-decoration: none !important;
 }
+
+input {
+  background-color: lighten($body-bg, 5) !important;
+  color: $body-color !important;
+  border: 1px solid transparent !important;
+  border-radius: 5rem !important;
+  padding: 1rem !important;
+
+  &:focus{
+    border: 1px solid lighten($body-bg, 20) !important;
+  }
+   
+}
