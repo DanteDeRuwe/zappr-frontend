@@ -14,6 +14,48 @@ import { Series } from "../series/series.model";
 export class UsersdataService {
   constructor(private _apollo: Apollo) {}
 
+  register$(
+    email: string,
+    password: string,
+    fullName: string
+  ): Observable<string> {
+    let user: User = new User(email, password, fullName);
+    const MUTATION = gql`
+      mutation register($user: UserInput!) {
+        userMutation {
+          register(user: $user)
+        }
+      }
+    `;
+    return this._apollo
+      .mutate<any>({
+        mutation: MUTATION,
+        variables: {
+          user,
+        },
+      })
+      .pipe(map((s) => s.data.userMutation.login));
+  }
+
+  login$(email: string, password: string): Observable<String> {
+    const MUTATION = gql`
+      mutation login($email: String!, $password: String!) {
+        userMutation {
+          login(email: $email, password: $password)
+        }
+      }
+    `;
+    return this._apollo
+      .mutate<any>({
+        mutation: MUTATION,
+        variables: {
+          email,
+          password,
+        },
+      })
+      .pipe(map((s) => s.data.userMutation.login));
+  }
+
   me$(): Observable<User> {
     const QUERY = gql`
       query {
