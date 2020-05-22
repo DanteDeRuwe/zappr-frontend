@@ -89,8 +89,28 @@ main {
   }
 }
 
-main footer {
+#wrapper footer {
   align-self: end;
   grid-area: footer;
   padding-bottom: 1rem;
+  svg {
+    height: 0.6rem;
+    margin-left: 0.2rem;
+    fill: $body-color;
+  }
+
+  a {
+    display: block;
+    float: right;
+    svg {
+      fill: $nav-bg;
+      height: 2rem;
+      fill: $nav-bg;
+      margin-right: 2rem;
+      &:hover {
+        cursor: pointer;
+        fill: $body-color;
+      }
+    }
+  }
 }
