@@ -113,7 +113,10 @@ export class UsersdataService {
       }
     `;
     return this._apollo
-      .watchQuery<any>({ query: QUERY })
+      .watchQuery<any>({
+        query: QUERY,
+        fetchPolicy: "network-only", //This is important, when switching users, we dont want it to use cached data!
+      })
       .valueChanges.pipe(map((s) => s.data.userQuery.me));
   }
 
