@@ -7,6 +7,7 @@ import { LoginComponent } from "./users/login/login.component";
 import { AuthGuard } from "./users/auth.guard";
 import { WatchlistComponent } from "./series/watchlist/watchlist.component";
 import { RegisterComponent } from "./users/register/register.component";
+import { NotFoundComponent } from "./not-found/not-found.component";
 
 const routes: Routes = [
   { path: "discover", component: DiscoverComponent },
@@ -24,6 +25,8 @@ const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
   { path: "", redirectTo: "discover", pathMatch: "full" },
+  { path: "404", component: NotFoundComponent },
+  { path: "**", redirectTo: "404" },
 ];
 
 @NgModule({

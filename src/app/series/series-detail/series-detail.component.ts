@@ -12,7 +12,7 @@ import { UsersdataService } from "src/app/users/usersdata.service";
   styleUrls: ["./series-detail.component.scss"],
 })
 export class SeriesDetailComponent implements OnInit {
-  public series$: Observable<Series>;
+  public series: Series;
 
   constructor(
     private _route: ActivatedRoute,
@@ -23,7 +23,15 @@ export class SeriesDetailComponent implements OnInit {
 
   ngOnInit(): void {
     const id: number = +this._route.snapshot.paramMap.get("id");
-    this.series$ = this._seriesdataService.get$(id);
+
+    // We subscribe here instead of async piping in the component, to just deal with the errors
+    this._seriesdataService.get$(id).subscribe(
+      (val) => {
+        if (val) this.series = val;
+        else this._router.navigate(["404"]);
+      },
+      (err) => this._router.navigate(["404"])
+    );
   }
 
   get authenticated(): boolean {

@@ -11,9 +11,10 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { UsersModule } from "./users/users.module";
 import { httpInterceptorProviders } from "./interceptors";
 import { ProfileComponent } from "./profile/profile.component";
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
-  declarations: [AppComponent, MainLayoutComponent, ProfileComponent],
+  declarations: [AppComponent, MainLayoutComponent, ProfileComponent, NotFoundComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
