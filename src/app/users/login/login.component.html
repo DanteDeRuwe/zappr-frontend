@@ -1,23 +1,33 @@
 <div class="container w-75">
   <h1 class="mb-5">Log in</h1>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <!-- EMAIL -->
     <div class="form-group">
-      <label for="exampleInputEmail1">Email address</label>
+      <label for="email">Email address</label>
       <input
         formControlName="email"
         type="email"
-        class="form-control form-control-sm"
-        id="exampleInputEmail1"
-        placeholder="example@example.com"
-        aria-describedby="emailHelp"
+        [ngClass]="['form-control', 'form-control-sm', getValidationMessage('email') ? 'border-danger' : '']"
+        id="email"
+        placeholder="richard@piedpiper.com"
       />
+      <p class="text-danger text-sm w-100 text-right px-2">{{ getValidationMessage("email") }}&nbsp;</p>
     </div>
+
+    <!-- PASSWORD -->
     <div class="form-group">
-      <label for="exampleInputPassword1">Password</label>
-      <a href="#" style="float: right; font-size: 12px;">Forgot password?</a>
-      <input type="password" formControlName="password" class="form-control form-control-sm" id="exampleInputPassword1" />
+      <label for="password">Password</label>
+      <input
+        type="password"
+        formControlName="password"
+        [ngClass]="['form-control', 'form-control-sm', getValidationMessage('password') ? 'border-danger' : '']"
+        id="password"
+        placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+      />
+      <p class="text-danger text-sm w-100 text-right px-2">{{ getValidationMessage("password") }}&nbsp;</p>
     </div>
-    <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+
+    <button type="submit" class="btn btn-primary btn-block" [disabled]="loginForm.invalid">Sign in</button>
     <div class="sign-up mt-3 float-left"><a [routerLink]="['/register']">Don't have an account? Create One</a></div>
     <div class="text-danger mt-3 float-right" *ngIf="this.errorMessage">{{ errorMessage }}</div>
   </form>

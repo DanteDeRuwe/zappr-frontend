@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.loginForm = this.fb.group({
       email: ["", [Validators.required, Validators.email]],
-      password: ["", [Validators.required, Validators.minLength(8)]],
+      password: ["", [Validators.required]],
     });
   }
 
@@ -33,5 +33,18 @@ export class LoginComponent implements OnInit {
         (error: GraphQLError) =>
           (this.errorMessage = error.message.replace("GraphQL error: ", ""))
       );
+  }
+
+  getValidationMessage(key: string): string {
+    let { errors, touched } = this.loginForm.get(key);
+
+    if (errors && touched) {
+      if (errors.required) return "This is a required field";
+      if (errors.minlength)
+        return `Minimum length is ${errors.minlength.requiredLength} characters`;
+      if (errors.email) return "Please provide a valid email address";
+    } else {
+      return "";
+    }
   }
 }
