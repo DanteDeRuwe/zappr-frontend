@@ -1,43 +1,97 @@
 # Zappr - Frontend Repo
 
-> readme updated: 29/03/2020
+> readme update: 22/05/2020
 
-## About the project
+## Over het project
 
-Zappr is a web application that enhances your local TV community.
-This is the repository of all the frontend code, using Angular 9 and the Apollo GraphQL client.
+Zappr is een app om je favoriete TV series nooit uit het oog te verliezen!
 
-This project is for educational purposes only!
+Dit is de repository voor de frontend-code, gebruik makende van Angular 9 en de Apollo GraphQL client. De backend-code kan gevonden worden in [deze repo](https://github.com/Web-IV/1920-b1-be-dantederuwe-hogent).
 
-## About me
+Dit project is enkel voor educatieve doeleinden!
 
-Dante De Ruwe - Student Applied Information Technology @ Ghent University College
+## Over mij
 
-## Progress update
+Dante De Ruwe - Student Toegepaste Informatica aan de Hogeschool Gent.
 
-### General thoughts
+Vragen? [Stuur me een email](mailto:dante.deruwe@student.hogent.be) of [submit een issue](https://github.com/Web-IV/1920-b1-fe-dantederuwe-hogent/issues) op deze repository.
 
-GraphQL is very nice to work with, if it itself wants to work with you. The combination of just learning Angular together with immediately adding GraphQL into the mix proves to be quite hard.
+## De webapplicatie
 
-### What have I done?
+> 💡 **Tip**: klik op de afbeeldingen om ze in volledige grootte te zien.
+> 
+[![](https://i.imgur.com/iJFQzvw.jpg)](https://i.imgur.com/iJFQzvw.jpg)
 
-The project at this stage consists of a series-module, in which I have a "dumb component" `series-showcase` to deal with presentation logic and a "smart" component `discover` that pulls data from the `seriesdata` service.
+[![](https://i.imgur.com/pn4EWZd.jpg)](https://i.imgur.com/pn4EWZd.jpg)
 
-### Improvements in the short term
+[![](https://i.imgur.com/KyPes5C.png)](https://i.imgur.com/KyPes5C.png)
 
-I'm working on providing a model / doing static typing, as now I mainly try stuff out with `any`.
-It proves to be quite difficult to do static typing with GraphQL, so as of this current deadline it isn't finished yet.
+[![](https://i.imgur.com/G3ohxjF.png)](https://i.imgur.com/G3ohxjF.png)
 
-### Long term goals
 
-- Discover
-- Watchlist
-- Commenting on series
-- Favoriting series
-- Rating series
-- Watch episode, actor, season data
-- ...
 
-## Conclusion
+### Features
 
-Learning Angular while learning to work with GraphQL Apollo and GraphQL-dotnet proves to be hard. I have also not chosen the easiest of projects, but I am determined to make this count!
+#### Discover
+Dit is de startpagina van de app. Hier kunt u series zien die vandaag en in de volgende 7 dagen uitgezonden worden.
+
+Ook is bovenaan een [zoekbalk](https://i.imgur.com/bM3w0zb.jpg), waarmee u elke serie die u wenst kunt opzoeken.
+
+
+#### Authenticatie
+Naast het bladeren door series kunt u ook *een account maken* en hiermee inloggen om zo toegang te krijgen tot verdere features.
+
+De registratie- en loginformulieren zijn voorzien van [validatie](https://i.imgur.com/FV31YsU.png), en geven ook de nodige [foutboodschappen van de server](https://i.imgur.com/hbKxws6.png) weer (email al in gebruik, wachtwoord onjuist, ...).
+
+> De authenticatie werkt met JWT Bearer tokens. Deze wordt verkregen van de server, opgeslagen in localstorage, en via een interceptor steeds toegevoegd aan de http-headers van elk request.
+
+#### Favorieten en watchlist
+Wanneer je als gebruiker ingelogd bent, kunt u met de knoppen [series toevoegen aan uw favorieten en uw watchlist](https://i.imgur.com/egoTu7E.png). Deze komen dan terecht in uw favorieten en watchlist, die u kan bereiken via de navigatiebalk.
+
+> Deze routes (`/favorites` en `/watchlist`) zijn afgeschermd met een auth-guard. Wanneer een niet-ingelogde gebruiker deze bezoekt, word die naar de login geredirect, en na succesvolle login terug naar deze route.
+
+
+#### Andere
+Er is een 404 page, *so that's something* ¯\\_(ツ)\_/¯
+
+### Plannen voor de toekomst
+In de backend is voorlopig nog meer mogelijk dan in de front-end. De bedoeling is toch zeker om dit project voort te zetten en features te implementeren zoals:
+
+#### Series
+- Comments en ratings plaatsen
+- Afleveringen zien
+- Acteurs en hun rollen zien (evt acteurs toevoegen aan favorieten)
+
+#### Afleveringen
+- Aflevering markeren als *gezien*
+- Aflevering raten
+
+#### Profiel
+- Lijst zien van ratings die je hebt geplaatst
+- Vrienden toevoegen en zien waar zij naar kijken?
+
+
+## Lijst van technologieën
+- Angular
+- Apollo Angular
+- GraphQL
+- RxJs
+- ngBootstrap
+- ngx-drag-scroll
+- Bootstrap
+
+## Met dank aan
+> Voor zowel front- als backend
+- De lectoren WEB4 voor de slides, codevoorbeelden, feedback en support
+- [TVMaze API](https://www.tvmaze.com/api) voor de data
+- [Stackoverflow](https://stackoverflow.com/), met in het bijzonder aan [dglozano](https://stackoverflow.com/users/10648865/dglozano), die antwoordde op [mijn vraag](https://stackoverflow.com/questions/60832540/ef-core-multiple-many-to-many-relationships-between-the-same-entities)
+- De graphQL-dotnet [Github](https://github.com/graphql-dotnet/graphql-dotnet) en [docs](https://graphql-dotnet.github.io/), met in het bijzonder [deze issue-thread](https://github.com/graphql-dotnet/authorization/issues/63#issuecomment-553877731)
+- De [Apollo-angular docs](https://www.apollographql.com/docs/angular/)
+- De [ngx-drag-scroll npm library](https://ngx-drag-scroll.fanjin.io/)
+- Talloze YouTubers
+- Talloze andere blogs, fora, websites...
+
+
+
+
+*PS: De naam Zappr komt van 'zapper' aka afstandsbediening aka zoals hier in West-Vlaanderen: "baksje"*
