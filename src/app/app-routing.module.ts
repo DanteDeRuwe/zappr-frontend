@@ -6,6 +6,7 @@ import { FavoriteSeriesComponent } from "./series/favorite-series/favorite-serie
 import { LoginComponent } from "./users/login/login.component";
 import { AuthGuard } from "./users/auth.guard";
 import { WatchlistComponent } from "./series/watchlist/watchlist.component";
+import { RegisterComponent } from "./users/register/register.component";
 
 const routes: Routes = [
   { path: "discover", component: DiscoverComponent },
@@ -21,6 +22,7 @@ const routes: Routes = [
   },
   { path: "series/:id", component: SeriesDetailComponent },
   { path: "login", component: LoginComponent },
+  { path: "register", component: RegisterComponent },
   { path: "", redirectTo: "discover", pathMatch: "full" },
 ];
 

@@ -50,11 +50,14 @@ export class UsersdataService {
     password: string,
     fullName: string
   ): Observable<string> {
-    let user: User = new User(email, password, fullName);
     const MUTATION = gql`
       mutation register($user: UserInput!) {
         userMutation {
-          register(user: $user)
+          register(user: $user) {
+            id
+            fullName
+            email
+          }
         }
       }
     `;
@@ -62,7 +65,11 @@ export class UsersdataService {
       .mutate<any>({
         mutation: MUTATION,
         variables: {
-          user,
+          user: {
+            email,
+            password,
+            fullName,
+          },
         },
       })
       .pipe(map((s) => s.data.userMutation.register));
