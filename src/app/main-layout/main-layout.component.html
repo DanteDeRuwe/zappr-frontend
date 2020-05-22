@@ -8,18 +8,27 @@
 
       <ul>
         <li>
-          <a [routerLink]="['discover']" routerLinkActive="active-nav"><ng-container *ngTemplateOutlet="binoculars"></ng-container>Discover</a>
+          <a [routerLink]="['discover']" routerLinkActive="active-nav"
+            ><div><ng-container *ngTemplateOutlet="binoculars"></ng-container></div>
+            <div>Discover</div></a
+          >
         </li>
         <li>
-          <a [routerLink]="['favorites']" routerLinkActive="active-nav"><ng-container *ngTemplateOutlet="popcorn"></ng-container>Favorites</a>
+          <a [routerLink]="['favorites']" routerLinkActive="active-nav">
+            <div><ng-container *ngTemplateOutlet="popcorn"></ng-container></div>
+            <div>Favorites</div>
+          </a>
         </li>
         <li>
-          <a [routerLink]="['watchlist']" routerLinkActive="active-nav"><ng-container *ngTemplateOutlet="watchlist"></ng-container>Watchlist</a>
+          <a [routerLink]="['watchlist']" routerLinkActive="active-nav">
+            <div><ng-container *ngTemplateOutlet="watchlist"></ng-container></div>
+            <div>Watchlist</div>
+          </a>
         </li>
       </ul>
-      <footer>
+      <div class="profile">
         <app-profile></app-profile>
-      </footer>
+      </div>
     </div>
   </nav>
 
