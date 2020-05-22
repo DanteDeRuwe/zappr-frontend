@@ -71,7 +71,71 @@ In de backend is voorlopig nog meer mogelijk dan in de front-end. De bedoeling i
 - Vrienden toevoegen en zien waar zij naar kijken?
 
 
-## Lijst van technologieën
+### Structuur van de app
+
+#### Modules
+
+```
+app
+├─── series
+└─── users
+app-routing
+graphql
+```
+#### Componenten
+```
+app (module en component)
+├─── main-layout
+├─── not-found
+├─── profile
+├─── series (module)
+│    ├─── discover
+│    ├─── favorite-series
+│    ├─── series-action
+│    ├─── series-actions
+│    ├─── series-detail
+│    ├─── series-search
+│    ├─── series-showcase
+│    └─── watchlist
+└─── users (module)
+     ├─── login
+     └─── register
+...
+```
+
+#### Services
+```
+app (module)
+├─── interceptors (folder)
+│    └───  auth-interceptor
+├─── series (module)
+│    └───  seriesdata.service
+└─── users (module)
+     └─── usersdata.service
+...
+```
+
+#### Guards
+```
+app (module)
+└─── users (module)
+     └─── auth
+...
+```
+
+
+#### Models
+```
+app (module)
+├─── series (module)
+│    └───  series.model
+└─── users (module)
+     └─── user.model
+...
+```
+
+
+### Lijst van technologieën
 - Angular
 - Apollo Angular
 - GraphQL
