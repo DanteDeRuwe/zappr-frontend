@@ -24,8 +24,8 @@ const routes: Routes = [
   { path: "series/:id", component: SeriesDetailComponent },
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
-  { path: "", redirectTo: "discover", pathMatch: "full" },
   { path: "404", component: NotFoundComponent },
+  { path: "", redirectTo: "discover", pathMatch: "full" },
   { path: "**", redirectTo: "404" },
 ];
 
