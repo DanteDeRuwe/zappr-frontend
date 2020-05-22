@@ -24,12 +24,14 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.fb.group({
       email: ["", [Validators.required, Validators.email]],
       password: ["", [Validators.required, Validators.minLength(8)]],
-      cofirmpassword: ["", [Validators.required, Validators.minLength(8)]],
+      confirmpassword: ["", [Validators.required, Validators.minLength(8)]],
       fullname: ["", [Validators.required]],
     });
   }
 
   onSubmit() {
+    if (this.registerForm.invalid) return;
+
     let {
       fullname,
       email,
@@ -37,7 +39,7 @@ export class RegisterComponent implements OnInit {
       confirmpassword,
     } = this.registerForm.value;
 
-    if (!password == confirmpassword) {
+    if (password != confirmpassword) {
       this.errorMessage = "The passwords do not match";
       return;
     }
@@ -47,5 +49,18 @@ export class RegisterComponent implements OnInit {
       (error: GraphQLError) =>
         (this.errorMessage = error.message.replace("GraphQL error: ", ""))
     );
+  }
+
+  getValidationMessage(key: string): string {
+    let { errors, touched } = this.registerForm.get(key);
+
+    if (errors && touched) {
+      if (errors.required) return "This is a required field";
+      if (errors.minlength)
+        return `Minimum length is ${errors.minlength.requiredLength} characters`;
+      if (errors.email) return "Please provide a valid email address";
+    } else {
+      return "";
+    }
   }
 }
