@@ -18,7 +18,7 @@
       <input type="password" formControlName="password" class="form-control form-control-sm" id="exampleInputPassword1" />
     </div>
     <button type="submit" class="btn btn-primary btn-block">Sign in</button>
-    <div class="sign-up mt-3 float-left">Don't have an account? <a href="#">Create One</a></div>
+    <div class="sign-up mt-3 float-left"><a [routerLink]="['/register']">Don't have an account? Create One</a></div>
     <div class="text-danger mt-3 float-right" *ngIf="this.errorMessage">{{ errorMessage }}</div>
   </form>
 </div>
