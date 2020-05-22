@@ -41,6 +41,11 @@ export class UsersdataService {
     }
   }
 
+  redirectToLogin(sourceUrl: string) {
+    this.redirectUrl = sourceUrl;
+    this._router.navigate(["login"]);
+  }
+
   /*
    * GraphQL
    */

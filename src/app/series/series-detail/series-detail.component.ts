@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Observable } from "rxjs";
 
 import { Series } from "../series.model";
@@ -16,6 +16,7 @@ export class SeriesDetailComponent implements OnInit {
 
   constructor(
     private _route: ActivatedRoute,
+    private _router: Router,
     private _seriesdataService: SeriesdataService,
     private _usersdataService: UsersdataService
   ) {}
@@ -27,5 +28,9 @@ export class SeriesDetailComponent implements OnInit {
 
   get authenticated(): boolean {
     return this._usersdataService.authenticated;
+  }
+
+  redirectToLogin() {
+    this._usersdataService.redirectToLogin(this._router.url);
   }
 }

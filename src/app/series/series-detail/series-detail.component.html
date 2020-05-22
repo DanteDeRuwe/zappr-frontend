@@ -3,7 +3,7 @@
     <h1>{{ s.name }}</h1>
   </header>
 
-  <series-actions *ngIf="this.authenticated" class="series-actions" [series]="s"></series-actions>
+  <series-actions *ngIf="this.authenticated; else notAuthSeriesActions" class="series-actions" [series]="s"></series-actions>
 
   <img class="series-img" *ngIf="s.imageUrl != null" [src]="s?.imageUrl" />
   <div class="series-description" [innerHTML]="s.description"></div>
@@ -27,6 +27,11 @@
       {{ c.text }}
     </div>
   </div>
-
-  <ng-template #noComments><p class="series-comments text-muted mt-5">No comments yet</p></ng-template>
 </div>
+
+<ng-template #noComments><p class="series-comments text-muted mt-5">No comments yet</p></ng-template>
+<ng-template #notAuthSeriesActions>
+  <p class="text-muted pt-3">
+    <a class="btn py-0" (click)="redirectToLogin()">Log in</a><small>to add this series to your favorites or watchlist!</small>
+  </p>
+</ng-template>
