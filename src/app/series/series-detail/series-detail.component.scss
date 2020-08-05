@@ -1,5 +1,7 @@
-@import "~bootstrap/scss/bootstrap";
-@import "../../../styles.scss";
+@import "../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../node_modules/bootstrap/scss/mixins";
+@import "../../../../node_modules/bootstrap/scss/variables";
+@import "../../../partial_styles/variables";
 
 .series-grid-container {
   display: grid;
