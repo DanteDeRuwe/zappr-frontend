@@ -3,7 +3,7 @@ import { APOLLO_OPTIONS, ApolloModule } from "apollo-angular";
 import { HttpLink, HttpLinkModule } from "apollo-angular-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
 
-const uri = "https://localhost:5001/graphql";
+const uri = "https://zappr-api.deruwe.me/graphql";
 
 export function createApollo(httpLink: HttpLink) {
   return {
