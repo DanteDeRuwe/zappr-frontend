@@ -1,12 +1,12 @@
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import { Apollo } from "apollo-angular";
 import gql from "graphql-tag";
-import { Observable, BehaviorSubject } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 import { map } from "rxjs/operators";
 
-import { User } from "./user.model";
 import { Series } from "../series/series.model";
-import { Router } from "@angular/router";
+import { User } from "./user.model";
 
 @Injectable({
   providedIn: "root",
@@ -54,7 +54,7 @@ export class UsersdataService {
     email: string,
     password: string,
     fullName: string
-  ): Observable<string> {
+  ): Observable<any> {
     const MUTATION = gql`
       mutation register($user: UserInput!) {
         userMutation {
