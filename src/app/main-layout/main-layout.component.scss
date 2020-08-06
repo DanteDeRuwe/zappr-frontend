@@ -80,23 +80,31 @@ footer {
   align-self: end;
   grid-area: footer;
   padding-bottom: 1rem;
+  text-align: center;
   svg {
     height: 0.6rem;
     margin-left: 0.2rem;
     fill: $body-color;
   }
-  .github {
-    display: block;
+  .right {
+    display: flex;
     float: right;
+    position: absolute;
+    right: 2rem;
+    bottom: 1rem;
+    z-index: 1;
+    align-items: center;
+    gap: 2rem;
     svg {
-      fill: $nav-bg;
-      height: 2rem;
-      fill: $nav-bg;
-      margin-right: 2rem;
+      height: 1rem;
+      fill: lighten($color: $nav-bg, $amount: 40);
       &:hover {
         cursor: pointer;
         fill: $body-color;
       }
+    }
+    .gh svg {
+      height: 1.5rem;
     }
   }
 }
