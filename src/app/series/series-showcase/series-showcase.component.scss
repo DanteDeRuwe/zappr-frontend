@@ -1,3 +1,6 @@
+@import "../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../node_modules/bootstrap/scss/mixins";
+@import "../../../../node_modules/bootstrap/scss/variables";
 $img-height: 200px;
 $img-width: ($img-height / 4) * 3;
 
@@ -21,6 +24,11 @@ section {
     }
     .see-more-or-less {
       cursor: pointer;
+    }
+    @include media-breakpoint-down(xs) {
+      .see-more-or-less {
+        display: none;
+      }
     }
   }
 
