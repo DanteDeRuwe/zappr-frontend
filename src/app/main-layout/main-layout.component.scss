@@ -73,28 +73,32 @@ nav {
 main {
   padding: 50px;
   grid-area: content;
-  max-width: calc(100vw - #{$nav-width} - #{$grid-gap}) !important;
+  max-width: calc(
+    100vw - #{$nav-width} - #{$grid-gap} - 20px
+  ) !important; //20px for scrollbar
 }
 
 footer {
+  font-size: 0.7rem;
   align-self: end;
   grid-area: footer;
   padding-bottom: 1rem;
   text-align: center;
+  display: flex;
+  justify-content: flex-end;
   svg {
     height: 0.6rem;
     margin-left: 0.2rem;
     fill: $body-color;
   }
+  .text-center {
+    width: 100%;
+  }
   .right {
     display: flex;
-    float: right;
-    position: absolute;
-    right: 2rem;
-    bottom: 1rem;
-    z-index: 1;
     align-items: center;
     gap: 2rem;
+    margin-right: 2rem;
     svg {
       height: 1rem;
       fill: lighten($color: $nav-bg, $amount: 40);
