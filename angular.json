@@ -23,7 +23,16 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
-            "assets": ["src/favicon.ico", "src/assets", "src/_redirects"],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets",
+              "src/_redirects",
+              "src/apple-touch-icon.png",
+              "src/favicon-32x32.png",
+              "src/favicon-16x16.png",
+              "src/site.webmanifest",
+              "src/favicon.ico"
+            ],
             "styles": ["src/styles.scss"],
             "scripts": []
           },
