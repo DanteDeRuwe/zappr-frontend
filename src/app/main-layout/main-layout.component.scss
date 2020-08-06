@@ -3,6 +3,11 @@
 @import "../../../node_modules/bootstrap/scss/variables";
 @import "../../partial_styles/variables.scss";
 
+$nav-width: 18rem;
+$grid-gap: 20px;
+$footer-height: 20px;
+$mobile-nav-height: 5rem;
+
 /* GRID
 */
 #wrapper {
@@ -11,9 +16,9 @@
     "nav content"
     "nav footer";
 
-  grid-template-columns: 18rem 1fr;
-  grid-template-rows: auto 20px;
-  grid-gap: 20px;
+  grid-template-columns: $nav-width 1fr;
+  grid-template-rows: auto $footer-height;
+  grid-gap: $grid-gap;
 
   min-height: 100vh;
 }
@@ -68,7 +73,7 @@ nav {
 main {
   padding: 50px;
   grid-area: content;
-  max-width: calc(100vw - 25rem);
+  max-width: calc(100vw - #{$nav-width} - #{$grid-gap}) !important;
 }
 
 footer {
@@ -99,7 +104,9 @@ footer {
 
 @include media-breakpoint-down(md) {
   main {
-    max-width: calc(100vw - 2rem);
+    max-width: 100vw !important;
+    padding: 2rem 1rem;
+    padding-bottom: $mobile-nav-height * 1.5;
   }
 
   footer {
@@ -114,6 +121,7 @@ footer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     .profile {
       padding: 1rem 2rem !important;
     }
@@ -124,7 +132,7 @@ footer {
     position: fixed;
     z-index: 999999;
     bottom: 0;
-    height: 5rem;
+    height: $mobile-nav-height;
     display: flex;
     flex-direction: row;
     background-color: $nav-bg;
