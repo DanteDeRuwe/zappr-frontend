@@ -17,7 +17,7 @@
     <div>Network: {{ s.network }}</div>
     <div>{{ s.numberOfSeasons }} season{{ s.numberOfSeasons > 1 ? "s" : "" }}</div>
     <div>Premiered {{ s.premiered }}</div>
-    <a *ngIf="s.officialSite" [href]="s.officialSite" class="btn btn-outline-secondary" target="_blank">Official website</a>
+    <a *ngIf="s.officialSite" [href]="s.officialSite" class="btn btn-outline-secondary" rel="noopener" target="_blank">Official website</a>
   </div>
 
   <div *ngIf="s.comments?.length > 0; else noComments" class="series-comments">
